@@ -6,9 +6,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/bannerstudiooauth2sso?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
-      username: root
-      password: why19991009
+      url: jdbc:mysql://82.157.145.197:3306/oauth2sso?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: oauth2sso
+      password: oauth2sso
       filter: stat
       initial-size: 1
       min-idle: 1
