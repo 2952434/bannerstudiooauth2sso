@@ -104,4 +104,42 @@ public class Member {
     @NotNull(message = "成员个性签名不能为空")
     @TableField("personalizedSignature")
     private String personalizedSignature;
+
+    /**
+     * 用户QQ号
+     */
+    @NotNull(message = "用户QQ号不能为空")
+    @TableField(value = "usersQQ")
+    private String usersQQ;
+    /**
+     * 用户微信号
+     */
+    @NotNull(message = "用户微信号不能为空")
+    @TableField(value = "usersWeChat")
+    private String usersWeChat;
+    /**
+     * 用户公司
+     */
+    @NotNull(message = "用户公司不能为空")
+    @TableField(value = "usersCompany")
+    private String usersCompany;
+    /**
+     * 用户的工作
+     */
+    @NotNull(message = "用户的工作不能为空")
+    @TableField(value = "usersWork")
+    private String usersWork;
+    /**
+     * 用户工作地址
+     */
+    @NotNull(message = "用户工作地址不能为空")
+    @TableField(value = "usersAddress")
+    private String usersAddress;
+    /**
+     * 用户薪资
+     */
+    @NotNull(message = "用户薪资不能为空")
+    @TableField(value = "usersPay")
+    private Integer usersPay;
+
 }

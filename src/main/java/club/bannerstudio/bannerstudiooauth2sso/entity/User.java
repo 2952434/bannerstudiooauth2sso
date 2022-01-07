@@ -9,7 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  * @Author: Ben
@@ -37,6 +39,7 @@ public class User {
     /**
      * 密码
      */
+    @Pattern(regexp = "(^[a-zA-Z]\\w{5,17}$)",message = "密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)")
     @NotNull(message = "密码不能为空")
     @TableField("password")
     private String password;
@@ -44,6 +47,7 @@ public class User {
     /**
      * 邮箱
      */
+    @Email(message = "邮箱不符合规范")
     @NotNull(message = "邮箱不能为空")
     @TableField("email")
     private String email;
@@ -51,6 +55,7 @@ public class User {
     /**
      * 手机号
      */
+    @Pattern(regexp = "(^[+]{0,1}(\\d){1,3}[ ]?([-]?((\\d)|[ ]){1,12})+$)",message = "手机号不符合格式")
     @NotNull(message = "手机号不能为空")
     @TableField("phone")
     private String phone;
