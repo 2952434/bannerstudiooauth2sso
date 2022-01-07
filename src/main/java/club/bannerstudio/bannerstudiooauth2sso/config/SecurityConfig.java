@@ -57,6 +57,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .permitAll()
                 .and()
+                .requestMatchers().antMatchers("/oauth/**","/login/**","/logout/**")
+                .and()
                 .rememberMe()
                 .and()
                 .csrf().disable();
