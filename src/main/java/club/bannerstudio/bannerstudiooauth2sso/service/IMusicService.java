@@ -33,10 +33,9 @@ public interface IMusicService {
     /**
      *更新音乐数据
      * @param music
-     * @param bannerId
      * @return RespBean
      */
-    RespBean updateMusic(Music music,Integer bannerId);
+    RespBean updateMusic(Music music);
 
     /**
      * 根据BannerID查询音乐数据

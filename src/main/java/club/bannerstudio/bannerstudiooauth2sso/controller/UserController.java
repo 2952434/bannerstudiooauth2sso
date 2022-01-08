@@ -101,6 +101,7 @@ public class UserController {
             logger.error("您输入的数据为空，请重新输入");
             return RespBean.error("您输入的数据为空，请重新输入");
         }
+        System.out.println(id);
         Integer returnId=null;
         try {
            returnId=Integer.parseInt(id);
