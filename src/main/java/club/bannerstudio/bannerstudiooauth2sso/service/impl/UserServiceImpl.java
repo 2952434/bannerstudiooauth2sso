@@ -70,6 +70,7 @@ public class UserServiceImpl implements IUserService {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper = queryWrapper.eq("userName", user.getUserName());
         List<User> list = userMapper.selectList(queryWrapper);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (list != null) {
             if (userMapper.update(user, queryWrapper) != 0){
                 logger.info("更新成功");
