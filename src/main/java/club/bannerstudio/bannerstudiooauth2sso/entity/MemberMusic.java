@@ -1,6 +1,7 @@
 package club.bannerstudio.bannerstudiooauth2sso.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -30,12 +31,14 @@ public class MemberMusic {
      * 音乐id
      */
     @NotNull(message = "音乐Id不能为空")
+    @TableField("music_id")
     private Integer musicId;
 
     /**
      *bannerId
      */
     @NotNull(message = "bannerId不能为空")
+    @TableField("banner_id")
     private Integer bannerId;
 
     public MemberMusic(Integer musicId, Integer bannerId) {

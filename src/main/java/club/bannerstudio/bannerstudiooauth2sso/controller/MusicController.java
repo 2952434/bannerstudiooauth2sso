@@ -48,7 +48,7 @@ public class MusicController {
     }
 
     @PutMapping("/admin/music")
-    public RespBean updateMusic(@Valid Music music, BindingResult bindingResult,@RequestParam Integer bannerId){
+    public RespBean updateMusic(@Valid Music music, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
             Map<String, Object> map = new HashMap<>();
             List<FieldError> errors = bindingResult.getFieldErrors();
@@ -60,11 +60,17 @@ public class MusicController {
             }
             return RespBean.error(map);
         }
-        return  iMusicService.updateMusic(music, bannerId);
+        return  iMusicService.updateMusic(music);
     }
-//    @GetMapping("/admin/music")
-//public RespBean selectMusicByBannerId(){
-//
-//    }
 
+
+    @GetMapping("/admin/music")
+    public RespBean selectMusicByBannerId(@RequestParam Integer bannerId){
+        return iMusicService.selectMusicListByBannerId(bannerId);
+    }
+
+    @GetMapping("/admin/music/page")
+    public RespBean selectMusicListByPage(@RequestParam Integer pageNumber,@RequestParam Integer pageSize,@RequestParam Integer bannerId){
+        return iMusicService.selectMusicListByPage(pageNumber,pageSize,bannerId);
+    }
 }

@@ -1,6 +1,7 @@
 package club.bannerstudio.bannerstudiooauth2sso.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -24,12 +25,13 @@ public class Music {
      * id
      */
     @TableId(type = IdType.AUTO)
-   private Integer id;
+    private Integer musicId;
 
     /**
      * 音乐名称
      */
     @NotNull(message = "音乐名称不能为空")
+    @TableField("musicName")
     private String musicName;
 
 
@@ -37,11 +39,13 @@ public class Music {
      * 音乐地址
      */
     @NotNull(message = "音乐地址不能为空")
+    @TableField("musicUrl")
     private String musicUrl;
 
     /**
      * 歌手姓名
      */
     @NotNull(message = "歌手姓名不能为空")
+    @TableField("singerName")
     private String singerName;
 }

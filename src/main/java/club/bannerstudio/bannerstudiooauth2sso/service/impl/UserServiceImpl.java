@@ -6,6 +6,7 @@ import club.bannerstudio.bannerstudiooauth2sso.mapper.UserMapper;
 import club.bannerstudio.bannerstudiooauth2sso.service.IUserService;
 import club.bannerstudio.bannerstudiooauth2sso.utils.RespBean;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.slf4j.Logger;
@@ -50,19 +51,12 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public RespBean deleteUser(Integer id) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        queryWrapper = queryWrapper.eq("id", id);
-        List<User> list = userMapper.selectList(queryWrapper);
-        if (list != null) {
-            if (userMapper.deleteById(queryWrapper) != 0){
-                logger.info("删除成功");
-                return RespBean.ok("删除成功");
-            }
-            logger.error("系统异常，删除失败");
-            return RespBean.error("系统异常，删除失败");
+        if (userMapper.deleteById(id) != 0){
+            logger.info("删除成功");
+            return RespBean.ok("删除成功");
         }
-        logger.info("您要删除的数据不存在，删除失败");
-        return RespBean.error("您要删除的数据不存在，删除失败");
+        logger.error("系统异常，删除失败");
+        return RespBean.error("系统异常，删除失败");
     }
 
     @Override
