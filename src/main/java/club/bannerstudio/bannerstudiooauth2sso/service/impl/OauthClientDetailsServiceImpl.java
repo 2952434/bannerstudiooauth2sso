@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,12 +26,16 @@ public class OauthClientDetailsServiceImpl implements IOauthClientDetailsService
     protected static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
+    protected PasswordEncoder passwordEncoder;
+
+    @Autowired
     protected OauthClientDetailsMapper oauthClientDetailsMapper;
     @Override
     public RespBean insertOauthClientDetails(OauthClientDetails oauthClientDetails) {
         QueryWrapper<OauthClientDetails> queryWrapper = new QueryWrapper<>();
         queryWrapper = queryWrapper.eq("client_id", oauthClientDetails.getClientId());
         List<OauthClientDetails> list = oauthClientDetailsMapper.selectList(queryWrapper);
+        oauthClientDetails.setClientSecret(passwordEncoder.encode(oauthClientDetails.getClientSecret()));
         if (list.size() == 0) {
             if (oauthClientDetailsMapper.insert(oauthClientDetails) == 1){
                 logger.info("插入成功");
@@ -65,6 +70,7 @@ public class OauthClientDetailsServiceImpl implements IOauthClientDetailsService
         QueryWrapper<OauthClientDetails> queryWrapper = new QueryWrapper<>();
         queryWrapper = queryWrapper.eq("client_id", oauthClientDetails.getClientId());
         List<OauthClientDetails> list = oauthClientDetailsMapper.selectList(queryWrapper);
+        oauthClientDetails.setClientSecret(passwordEncoder.encode(oauthClientDetails.getClientSecret()));
         if (list != null) {
             if (oauthClientDetailsMapper.update(oauthClientDetails, queryWrapper) != 0){
                 logger.info("更新成功");

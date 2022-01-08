@@ -18,7 +18,7 @@
     <div class="box">
         <div class="title">统一认证中心</div>
         <div>
-<!--        <form action="/login" method="post">-->
+        <form action="/login" method="post">
             <div class="input">
                 <label for="name">用户名</label>
                 <input type="text" name="username" id="name">
@@ -30,12 +30,12 @@
                 <span class="spin"></span>
             </div>
             <div class="button login">
-                <button type="button" onclick="test()">
+                <button type="submit">
                     <span>登录</span>
                     <i class="fa fa-check"></i>
                 </button>
             </div>
-<!--        </form>-->
+        </form>
         </div>
         <a href="javascript:" class="pass-forgot">忘记密码？</a>
     </div>
@@ -71,34 +71,35 @@
 
 <script src="js/jquery.min.js"></script>
 <script>
-    function test() {
-        alert(1111)
-        console.log($("#name").val());
-        console.log($("#pass").val());
-        $.ajax({
-            url:"/login",
-            type:"POST",
-            dataType:"JSON",
-            // async:true,
-            data:{
-                username:$("#name").val(),
-                password:$("#pass").val(),
-            },
-            success:function(data){
-                console.log(data.code)
-                console.log(data)
-                if(data.code==200){
-                    console.log(data)
-                    alert("成功，ok");
-                }
-            },
-            error:function(data){
-                console.log(data)
-                alert(data)
-                alert("异常")
-            }
-        });
-    }
+    // function test() {
+    //     alert(1111)
+    //     console.log($("#name").val());
+    //     console.log($("#pass").val());
+    //     $.ajax({
+    //         url:"/login",
+    //         type:"POST",
+    //         dataType:"JSON",
+    //         // async:true,
+    //         data:{
+    //             username:$("#name").val(),
+    //             password:$("#pass").val(),
+    //         },
+    //         success:function(data){
+    //             console.log("你好世界")
+    //             console.log(data.code)
+    //             console.log(data)
+    //             if(data.code==200){
+    //                 console.log(data)
+    //                 alert("成功，ok");
+    //             }
+    //         },
+    //         error:function(data){
+    //             console.log(data)
+    //             alert(data)
+    //             alert("异常")
+    //         }
+    //     });
+    // }
 
     // function GetRequest() {
     //     var url = location.search; //获取url中"?"符后的字串

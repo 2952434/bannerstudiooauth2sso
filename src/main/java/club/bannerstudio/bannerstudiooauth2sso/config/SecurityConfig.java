@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //    @Autowired
 //    protected AuthAuthenticationSuccessHandler authAuthenticationSuccessHandler;
-//
+
 
     @Autowired
     protected UserAuthServiceImpl userAuthService;
