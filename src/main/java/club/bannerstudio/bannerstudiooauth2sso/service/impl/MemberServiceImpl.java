@@ -24,6 +24,12 @@ public class MemberServiceImpl implements IMemberService {
 
     @Autowired
     protected MemberMapper memberMapper;
+
+    /**
+     * 增加成员数据
+     * @param member
+     * @return RespBean
+     */
     @Override
     public RespBean insertMember(Member member) {
         QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
@@ -41,6 +47,11 @@ public class MemberServiceImpl implements IMemberService {
         return RespBean.error("您输入的数据已经存在，插入失败");
     }
 
+    /**
+     * 根据BannerID删除成员数据
+     * @param bannerId
+     * @return RespBean
+     */
     @Override
     public RespBean deleteMember(Integer bannerId) {
         QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
@@ -58,6 +69,11 @@ public class MemberServiceImpl implements IMemberService {
         return RespBean.error("您要删除的数据不存在，删除失败");
     }
 
+    /**
+     *更新成员数据
+     * @param member
+     * @return RespBean
+     */
     @Override
     public RespBean updateMember(Member member) {
         QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
@@ -74,6 +90,11 @@ public class MemberServiceImpl implements IMemberService {
         return RespBean.error("您要更新的数据不存在，更新失败");
     }
 
+    /**
+     * 根据BannerID查询成员数据
+     * @param bannerId
+     * @return RespBean
+     */
     @Override
     public RespBean selectMemberByBannerId(Integer bannerId) {
         QueryWrapper<Member> queryWrapper = new QueryWrapper<>();
@@ -87,6 +108,12 @@ public class MemberServiceImpl implements IMemberService {
         return RespBean.error("查询失败");
     }
 
+    /**
+     * 分页查询所有的成员数据
+     * @param pageNumber
+     * @param pageSize
+     * @return RespBean
+     */
     @Override
     public RespBean selectMemberListByPage(Integer pageNumber, Integer pageSize) {
         Page<Member> page = new Page<>(pageNumber, pageSize);

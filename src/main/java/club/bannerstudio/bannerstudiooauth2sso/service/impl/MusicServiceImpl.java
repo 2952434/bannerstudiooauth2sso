@@ -34,6 +34,12 @@ public class MusicServiceImpl implements IMusicService {
     @Autowired
     protected MemberMusicMapper memberMusicMapper;
 
+    /**
+     * 增加音乐数据
+     * @param music
+     * @param bannerId
+     * @return RespBean
+     */
     @Override
     public RespBean insertMusic(Music music, Integer bannerId) {
         QueryWrapper<Music> queryWrapperMusic = new QueryWrapper<>();
@@ -79,8 +85,13 @@ public class MusicServiceImpl implements IMusicService {
         return RespBean.error("系统异常,音乐插入失败");
     }
 
+    /**
+     * 根据删除音乐
+     * @param musicId
+     * @return RespBean
+     */
     @Override
-    public RespBean deleteMusic(Integer bannerId, Integer musicId) {
+    public RespBean deleteMusic(Integer musicId) {
         UpdateWrapper<MemberMusic> updateWrapperMusic = new UpdateWrapper<>();
         updateWrapperMusic.eq("music_id",musicId);
         int delete = memberMusicMapper.delete(updateWrapperMusic);
@@ -94,6 +105,11 @@ public class MusicServiceImpl implements IMusicService {
         }
     }
 
+    /**
+     *更新音乐数据
+     * @param music
+     * @return RespBean
+     */
     @Override
     public RespBean updateMusic(Music music) {
         int updateById = musicMapper.updateById(music);
@@ -106,6 +122,11 @@ public class MusicServiceImpl implements IMusicService {
         }
     }
 
+    /**
+     * 根据BannerID查询音乐数据
+     * @param bannerId
+     * @return RespBean
+     */
     @Override
     public RespBean selectMusicListByBannerId(Integer bannerId) {
         QueryWrapper<MemberMusic> queryWrapper = new QueryWrapper<>();
@@ -127,6 +148,13 @@ public class MusicServiceImpl implements IMusicService {
         }
     }
 
+    /**
+     * 分页查询所有的成音乐数据
+     * @param pageNumber
+     * @param pageSize
+     * @param bannerId
+     * @return RespBean
+     */
     @Override
     public RespBean selectMusicListByPage(Integer pageNumber, Integer pageSize, Integer bannerId) {
         Page<MemberMusic> page = new Page<>(pageNumber, pageSize);

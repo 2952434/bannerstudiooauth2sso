@@ -23,12 +23,11 @@ public interface IMusicService {
     RespBean insertMusic(Music music, Integer bannerId);
 
     /**
-     * 根据BannerID删除成员数据
-     * @param bannerId
+     * 根据删除音乐
      * @param musicId
      * @return RespBean
      */
-    RespBean deleteMusic(Integer bannerId,Integer musicId);
+    RespBean deleteMusic(Integer musicId);
 
     /**
      *更新音乐数据

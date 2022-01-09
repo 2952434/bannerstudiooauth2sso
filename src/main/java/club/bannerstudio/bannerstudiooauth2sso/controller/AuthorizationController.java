@@ -1,5 +1,6 @@
 package club.bannerstudio.bannerstudiooauth2sso.controller;
 
+import io.swagger.annotations.Api;
 import org.springframework.security.oauth2.provider.AuthorizationRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import java.util.Map;
  */
 @Controller
 @SessionAttributes("authorizationRequest")
+@Api(value = "AuthorizationController")
 public class AuthorizationController {
 
 

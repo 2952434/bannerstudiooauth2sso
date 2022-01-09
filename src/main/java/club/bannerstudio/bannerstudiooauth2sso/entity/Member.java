@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,6 +21,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 @ToString
 @TableName("member")
+@ApiModel(value = "成员信息实体")
 public class Member {
 
     /**
@@ -108,38 +110,38 @@ public class Member {
     /**
      * 用户QQ号
      */
-    @NotNull(message = "用户QQ号不能为空")
+    @NotNull(message = "成员QQ号不能为空")
     @TableField(value = "usersQQ")
-    private String usersQQ;
+    private String memberQQ;
     /**
      * 用户微信号
      */
-    @NotNull(message = "用户微信号不能为空")
+    @NotNull(message = "成员微信号不能为空")
     @TableField(value = "usersWeChat")
-    private String usersWeChat;
+    private String memberWeChat;
     /**
      * 用户公司
      */
-    @NotNull(message = "用户公司不能为空")
+    @NotNull(message = "成员公司不能为空")
     @TableField(value = "usersCompany")
-    private String usersCompany;
+    private String memberCompany;
     /**
      * 用户的工作
      */
-    @NotNull(message = "用户的工作不能为空")
+    @NotNull(message = "成员的工作不能为空")
     @TableField(value = "usersWork")
-    private String usersWork;
+    private String memberWork;
     /**
      * 用户工作地址
      */
-    @NotNull(message = "用户工作地址不能为空")
+    @NotNull(message = "成员工作地址不能为空")
     @TableField(value = "usersAddress")
-    private String usersAddress;
+    private String memberAddress;
     /**
      * 用户薪资
      */
-    @NotNull(message = "用户薪资不能为空")
+    @NotNull(message = "成员薪资不能为空")
     @TableField(value = "usersPay")
-    private Integer usersPay;
+    private Integer memberPay;
 
 }
