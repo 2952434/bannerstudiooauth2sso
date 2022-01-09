@@ -1,8 +1,8 @@
 package club.bannerstudio.bannerstudiooauth2sso.config;
 
 import club.bannerstudio.bannerstudiooauth2sso.handler.AuthAccessDeniedHandler;
-//import club.bannerstudio.bannerstudiooauth2sso.handler.AuthAuthenticationFailureHandler;
-//import club.bannerstudio.bannerstudiooauth2sso.handler.AuthAuthenticationSuccessHandler;
+import club.bannerstudio.bannerstudiooauth2sso.handler.AuthAuthenticationFailureHandler;
+import club.bannerstudio.bannerstudiooauth2sso.handler.AuthAuthenticationSuccessHandler;
 import club.bannerstudio.bannerstudiooauth2sso.service.impl.UserAuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,11 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-//    @Autowired
-//    protected AuthAuthenticationFailureHandler authAuthenticationFailureHandler;
-//
-//    @Autowired
-//    protected AuthAuthenticationSuccessHandler authAuthenticationSuccessHandler;
+    @Autowired
+    protected AuthAuthenticationFailureHandler authAuthenticationFailureHandler;
+
+    @Autowired
+    protected AuthAuthenticationSuccessHandler authAuthenticationSuccessHandler;
 
 
     @Autowired
@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/login.html", "/css/**", "/js/**", "/images/**","/favicon.ico","/register");
+        web.ignoring().antMatchers("/login.html", "/css/**", "/js/**", "/img/**","/favicon.ico","/register");
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -64,8 +64,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/login")
-//                .successHandler(authAuthenticationSuccessHandler)
-//                .failureHandler(authAuthenticationFailureHandler)
+                .successHandler(authAuthenticationSuccessHandler)
+                .failureHandler(authAuthenticationFailureHandler)
                 .permitAll()
                 .and()
                 .requestMatchers().antMatchers("/oauth/**","/login/**","/logout/**")

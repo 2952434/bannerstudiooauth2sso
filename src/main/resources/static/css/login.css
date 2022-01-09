@@ -1,0 +1,166 @@
+.whole {
+  background: url('../img/BackGroundImage.png') no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+.whole .login {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 300px;
+  text-align: center;
+}
+.whole .login .header {
+  height: 60px;
+}
+.whole .login .header h2 {
+  line-height: 95px;
+  color: black;
+}
+.whole .login .content {
+  position: relative;
+  width: 480px;
+  height: 320px;
+  margin: 10px auto;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+}
+.whole .login .content .register {
+  position: absolute;
+  bottom: 75px;
+  left: 22%;
+}
+.whole .login .content .inputone {
+  position: absolute;
+  top: 100px;
+  left: 22%;
+  margin-bottom: 20px;
+  width: 270px;
+}
+.whole .login .content .inputtwo {
+  position: absolute;
+  top: 160px;
+  left: 22%;
+  margin-bottom: 20px;
+  width: 270px;
+}
+.whole .login .content .forget {
+  position: absolute;
+  bottom: 75px;
+  left: 65%;
+}
+.whole .login .content .denglu {
+  position: absolute;
+  bottom: 35px;
+  left: 22%;
+  width: 270px;
+  border-radius: 12px;
+}
+.whole .login .content .zhuce {
+  position: absolute;
+  right: 0;
+  width: 170px;
+}
+.whole .count {
+  margin-left: 0!important;
+}
+.whole .login11 {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 300px;
+  text-align: center;
+}
+.whole .login11 .header1 {
+  height: 60px;
+}
+.whole .login11 .header1 h2 {
+  line-height: 95px;
+  color: black;
+}
+.whole .login11 .content1 {
+  position: relative;
+  width: 480px;
+  height: 480px;
+  margin: 10px auto;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+}
+.whole .login11 .content1 .register11 {
+  position: absolute;
+  bottom: 70px;
+  left: 22%;
+}
+.whole .login11 .content1 .inputone1 {
+  position: absolute;
+  top: 80px;
+  left: 22%;
+  margin-bottom: 20px;
+  width: 270px;
+}
+.whole .login11 .content1 .inputtwo1 {
+  position: absolute;
+  top: 140px;
+  left: 22%;
+  margin-bottom: 20px;
+  width: 270px;
+}
+.whole .login11 .content1 .inputThree1 {
+  position: absolute;
+  top: 200px;
+  left: 22%;
+  margin-bottom: 20px;
+  width: 270px;
+}
+.whole .login11 .content1 .inputFour1 {
+  position: absolute;
+  top: 310px;
+  left: 22%;
+  margin-bottom: 20px;
+  width: 270px;
+}
+.whole .login11 .content1 .inputFour1 .yanone1,
+.whole .login11 .content1 .inputFour1 .yantwo1 {
+  height: 40px;
+}
+.whole .login11 .content1 .inputFour1 .yanone1 {
+  width: 123px;
+  margin-right: 10px;
+  border: 1px solid #DCDFE6;
+  border-radius: 4px;
+  padding: 0 15px;
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.whole .login11 .content1 .inputFour1 .yanone1:hover {
+  border-color: #9ea1a5;
+}
+.whole .login11 .content1 .inputFour1 .yantwo1 {
+  width: 100px;
+  border-radius: 4px;
+  border: 1px solid #DCDFE6;
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.whole .login11 .content1 .inputFour1 .count {
+  background-color: rgba(239, 239, 239);
+}
+.whole .login11 .content1 .zhuceOne1 {
+  position: absolute;
+  bottom: 30px;
+  left: 22%;
+  width: 270px;
+  border-radius: 12px;
+}
+.whole .login11 .content1 .zhuce1 {
+  position: absolute;
+  right: 0;
+  width: 170px;
+}
+/*# sourceMappingURL=login.css.map */
