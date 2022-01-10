@@ -49,4 +49,10 @@ public interface IMemberService {
      */
     RespBean selectMemberListByPage(Integer pageNumber, Integer pageSize);
 
+    /**
+     * 根据用户名查询用户头像
+     * @param userName
+     * @return RespBean
+     */
+    RespBean selectHeadUrlByUserName(String userName);
 }

@@ -95,7 +95,7 @@ public class AuthorizationController {
         logger.info("model信息:"+model.toString());
         AuthorizationRequest authorizationRequest = (AuthorizationRequest) model.get("authorizationRequest");
 
-        modelAndView.setViewName("base-oauthcenter");
+        modelAndView.setViewName("oauthcenter");
 //        Map<String,Object> stringObjectMap=new HashMap<>();
 //        stringObjectMap.put("clientId",authorizationRequest.getClientId());
 //        stringObjectMap.put("scopes",authorizationRequest.getScope());

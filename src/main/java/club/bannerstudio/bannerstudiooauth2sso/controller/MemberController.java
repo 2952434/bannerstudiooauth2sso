@@ -70,7 +70,9 @@ public class MemberController {
             @ApiImplicitParam(type = "query", name = "memberAddress",
                     value = "成员工作地址", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(type = "query", name = "memberPay",
-                    value = "成员薪资", required = true, dataTypeClass = Integer.class)
+                    value = "成员薪资", required = true, dataTypeClass = Integer.class),
+            @ApiImplicitParam(type = "query", name = "personalIntroduction",
+                    value = "成员自我介绍", required = true, dataTypeClass = String.class)
     })
     public RespBean insertMember(@Valid Member member, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -146,7 +148,9 @@ public class MemberController {
             @ApiImplicitParam(type = "query", name = "memberAddress",
                     value = "成员工作地址", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(type = "query", name = "memberPay",
-                    value = "成员薪资", required = true, dataTypeClass = Integer.class)
+                    value = "成员薪资", required = true, dataTypeClass = Integer.class),
+            @ApiImplicitParam(type = "query", name = "personalIntroduction",
+                    value = "成员自我介绍", required = true, dataTypeClass = String.class)
     })
     public RespBean updateMember(@Valid Member member, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -194,5 +198,14 @@ public class MemberController {
     })
     public RespBean selectMemberListByPage(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
         return iMemberService.selectMemberListByPage(pageNumber, pageSize);
+    }
+
+
+    @GetMapping("/member/head")
+    @ApiOperation(value = "根据用户名查询用户头像")
+    @ApiImplicitParam(type = "query",name = "userName",
+            value = "用户名",required = true,dataTypeClass = String.class)
+    public RespBean selectHeadUrlByUserName(@RequestParam String userName) {
+        return iMemberService.selectHeadUrlByUserName(userName);
     }
 }

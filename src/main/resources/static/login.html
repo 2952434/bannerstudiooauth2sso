@@ -11,49 +11,41 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- 引入组件库 -->
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <div id="app">
     <div class="whole">
     <!--    登录-->
     <div class="login" v-show="show3">
-        <el-form>
         <div class="content">
             <div class="header">
                 <h1>旗帜软件工作室统一授权中心</h1>
                 <h2>欢迎登录</h2>
             </div>
-            <div class="remember"><input type="checkbox" name="remember" id="me" style="width: 14px;height: 14px"><label for="me">记住我</label></div>
             <div class="register">
                 没有账号？<el-button type="text" @click="register1">点击注册</el-button>
             </div>
             <div class="inputone">
                 <el-form :model="ruleForm" ref="dynamicValidateForm" label-width="0px" class="demo-dynamic">
                     <el-form-item
-                            prop="email"
-                            label=""
-                            :rules="[
-      { required: true, message: '请输入用户名', trigger: 'blur' },
-      { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
-    ]">
-                        <el-input v-model="ruleForm.email" autocomplete="off" placeholder="请输入邮箱" ref="adminname"></el-input>
+                            prop="email">
+                        <el-input v-model="ruleForm.username" placeholder="请输入用户名" ref="adminname"></el-input>
                     </el-form-item>
-                </el-form>
-            </div>
-            <div class="inputtwo">
-                <el-form :model="ruleForm" ref="dynamicValidateForm" label-width="0px" class="demo-dynamic">
                     <el-form-item
                             prop="pass">
                         <el-input placeholder="请输入密码" v-model="ruleForm.pass" show-password ref="adminword"></el-input>
                     </el-form-item>
+                <div class="forget">
+                    <el-button type="text" @click="forget">忘记密码?</el-button>
+                </div>
+                    <div class="remember">
+                        <input type="checkbox" name="remember" id="me" style="width: 14px;height: 14px" v-model="ruleForm.rememberMe"><label for="me">记住我</label>
+                    </div>
+                <el-button type="primary" @click="homepageClick" class="denglu">登录</el-button>
                 </el-form>
             </div>
-            <div class="forget">
-                <el-button type="text" @click="forget">忘记密码?</el-button>
-            </div>
-            <el-button type="primary" @click="homepageClick" class="denglu">登录</el-button>
         </div>
-        </el-form>
     </div>
     <!--    :close-on-click-modal="false"-->
     <div>
@@ -100,10 +92,10 @@
                 已有账号？<el-button type="text" @click="login3">点击登录</el-button>
             </div>
             <div class="inputone1">
-                <el-input v-model="user_name" placeholder="请输入用户名" ref="adminname"></el-input>
-            </div>
-            <div class="inputtwo1">
                 <el-form :model="ruleForm1" ref="dynamicValidateForm" label-width="0px" class="demo-dynamic">
+                    <el-form-item>
+                        <el-input v-model="ruleForm1.username" placeholder="请输入用户名" ref="adminname"></el-input>
+                    </el-form-item>
                     <el-form-item
                             prop="email"
                             label=""
@@ -117,26 +109,22 @@
                     <el-form-item>
                         <el-input v-model="ruleForm1.phone" autocomplete="off" placeholder="请输入手机号"></el-input>
                     </el-form-item>
-                </el-form>
-            </div>
-            <div class="inputThree1">
-                <el-form :model="ruleForm1" status-icon :rules="ruless" ref="ruleForm" label-width="0px" class="demo-ruleForm">
                     <el-form-item label="" prop="pass">
                         <el-input type="password" v-model="ruleForm1.pass" autocomplete="off" placeholder="请输入密码"></el-input>
                     </el-form-item>
                     <el-form-item label="" prop="checkPass">
                         <el-input type="password" v-model="ruleForm1.checkPass" autocomplete="off" placeholder="请再次确认密码"></el-input>
                     </el-form-item>
+                    <el-form-item class="end">
+                        <input type="text" v-model="ruleForm1.code1" placeholder="请输入验证码" class="yanone1" style="outline: #b0b0b0 none;">
+                        <el-button class="yantwo1" style="outline:none;text-align: center" v-show="show1" @click="getCode1">获取验证码</el-button>
+                        <el-button class="yantwo1 count kuang" style="outline:none" disabled v-show="!show1">{{counts}}s</el-button>
+                    </el-form-item>
+                    <el-form-item class="end">
+                        <el-button type="primary" @click="login3Click" class="zhuceOne1">注册</el-button>
+                    </el-form-item>
                 </el-form>
             </div>
-            <!--        //验证码-->
-            <p class="inputFour1">
-                <input type="text" v-model="code1" placeholder="请输入验证码" class="yanone1" style="outline: #b0b0b0 none;" >
-                <input type="button" value="获取验证码" class="yantwo1" style="outline:none" v-show="show1" @click="getCode1">
-                <button type="button" value="" class="yantwo1 count kuang" style="outline:none" disabled v-show="!show1">{{counts}}s</button>
-            </p>
-            <el-button type="primary" @click="login3Click" class="zhuceOne1">注册</el-button>
-            <!--      <el-button type="primary" @click="" class="zhuce">注册</el-button>-->
         </div>
     </div>
 </div>
@@ -188,23 +176,24 @@
             };
             return {
                 disabled: true,
-                user_name :'',
                 show3 : true,
                 show4 : false,
                 //登录
                 ruleForm: {
-                    email:'',
-                    pass:''
+                    username:'',
+                    pass:'',
+                    rememberMe: false
                 },
                 //注册
                 ruleForm1 : {
+                    username:'',
                     email : '',
                     phone : '',
                     pass: '',
                     checkPass: '',
+                    code1 :'',
                 },
                 //code1为注册验证码
-                code1 :'',
                 show: true,
                 count: '',
                 timer: null,
@@ -260,15 +249,61 @@
                 this.dialogFormVisible2 = !this.dialogFormVisible2
             },
             homepageClick() {
-                if (this.ruleForm.email ==='123@qq.com' && this.ruleForm.pass === '123') {
-                    this.$message({
-                        type: 'success',
-                        message: '登录成功!'
-                    })
-                    window.location.href="center.html"
-                }else {
-                    this.$message.error('登录失败,您的输入有误')
+                // let url=
+                // 表单的手动校验
+                // this.$refs.dynamicValidateForm.validate(async valid => {
+                //     if (valid) {
+                // axios.defaults.withCredentials = true;
+                console.log(this.ruleForm.username)
+                console.log(this.ruleForm.pass)
+                var formData = new FormData();
+                formData.append("username",this.ruleForm.username);
+                formData.append("password",this.ruleForm.pass);
+                console.log(this.ruleForm.rememberMe)
+                if (this.ruleForm.rememberMe===true){
+                    formData.append("remember-me","on")
                 }
+                axios({
+                    method:'POST',
+                    url:'/login',
+                    data:formData,
+                    headers:{
+                        'Accept':'application/json, text/javascript, */*; q=0.01',
+                        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+                    }
+                }).then(res=>{
+                    console.log(res.data)
+                    console.log(res.data.status)
+                    if (res.data.status===200){
+                        console.log(res.data.obj)
+                        console.log(res.data.obj.url)
+                       let url= res.data.obj.url
+                        window.location.href=url
+                        // window.location.href="http://localhost:8081/oauth/authorize?client_id=javaboy&response_type=code&scope=all&redirect_uri=http://localhost:8084/callback"
+                        // let ajaxSession=res.data.obj.session
+                        // axios({
+                        //     method:'POST',
+                        //     url:'/oauth/getJson'
+                        // }).then(res=>{
+                        //     console.log(res.data)
+                        // }).catch(err=>{
+                        //         console.log(err.data)
+                        //     }
+                        // )
+                    }
+                }).catch(err => {
+                    console.log(err) // 后台报错返回
+                })
+
+                // if (this.ruleForm.email ==='123@qq.com' && this.ruleForm.pass === '123') {
+                //     this.$message({
+                //         type: 'success',
+                //         message: '登录成功!'
+                //     })
+                //     window.location.href="center.html"
+                // }else {
+                //     this.$message.error('登录失败,您的输入有误')
+                // }
             },
             getCode(){},
             login3Click(){},

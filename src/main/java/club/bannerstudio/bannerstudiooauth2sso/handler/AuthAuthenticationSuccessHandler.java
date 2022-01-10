@@ -46,25 +46,32 @@ public class AuthAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
         Map<String,String> stringStringMap=JsonUtils.toMap(jsonString,String.class,String.class);
         String authority=stringStringMap.get("authority").toString();
         logger.info(stringStringMap.get("authority").toString());
+        HttpSession httpSession=request.getSession();
+        String url=httpSession.getAttribute("SPRING_SECURITY_SAVED_REQUEST")+"";
+        String substringUrl = url.substring(21, 149);
+        logger.info("substringUrl："+substringUrl);
         Map<String,String> stringMap=new HashMap<>();
+        Map<String,Object> stringObjectMap=new HashMap<>();
         if (authority.equals("ROLE_User")){
-            stringMap.put("userName",userName);
-            stringMap.put("authority","用户");
+            substringUrl+="&username"+userName+"&authority"+"用户";
+            stringObjectMap.put("url",substringUrl);
+//            stringMap.put("userName",userName);
+//            stringMap.put("authority","用户");
         }else if (authority.equals("ROLE_IntranetUser")){
-            stringMap.put("userName",userName);
-            stringMap.put("authority","工作室内部成员");
+            substringUrl+="&username"+userName+"&authority"+"工作室内部成员";
+            stringObjectMap.put("url",substringUrl);
         }else if (authority.equals("ROLE_InterViewUser")){
-            stringMap.put("userName",userName);
-            stringMap.put("authority","工作室面试官成员");
+            substringUrl+="&username"+userName+"&authority"+"工作室面试官成员";
+            stringObjectMap.put("url",substringUrl);
         }else if(authority.equals("ROLE_AdminUser")){
-            stringMap.put("userName",userName);
-            stringMap.put("authority","工作室管理员");
+            substringUrl+="&username"+userName+"&authority"+"工作室管理员";
+            stringObjectMap.put("url",substringUrl);
         }
 
 
         logger.info("认证信息:" + JSON.toJSONString(authentication));
-        HttpSession httpSession=request.getSession();
-        Map<String,Object> stringObjectMap=new HashMap<>();
+
+
         stringObjectMap.put("message","登录成功");
 //        stringObjectMap.put("session",httpSession);
         stringObjectMap.put("userMap",stringMap);
@@ -80,13 +87,21 @@ public class AuthAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
             logger.info(name + " : " + value);
         }
         UrlPattern urlPattern=new UrlPattern();
-        String url=httpSession.getAttribute("SPRING_SECURITY_SAVED_REQUEST")+"";
-        String client_id=urlPattern.getParamByUrl(url,"client_id");
-        String scope=urlPattern.getParamByUrl(url,"scope");
-        logger.info("客户端id:"+client_id);
-        logger.info("scope:"+scope);
-        stringObjectMap.put("client_id",client_id);
-        stringObjectMap.put("scope",scope);
+
+//        String client_id=urlPattern.getParamByUrl(url,"client_id");
+//        String scope=urlPattern.getParamByUrl(url,"scope");
+//        String redirect_uri=urlPattern.getParamByUrl(url,"redirect_uri");
+//        logger.info(redirect_uri);
+
+//        String response_type=urlPattern.getParamByUrl(url,"response_type");
+//        String returnUrl="http://localhost:8081/oauth/authorize?"+"client_id"+client_id+"&"+"response_type"+response_type+"&"+"scope"+scope+"&"+"redirect_uri"+redirect_uri;
+//        logger.info("returnUrl:"+returnUrl);
+//        logger.info("客户端id:"+client_id);
+//        logger.info("scope:"+scope);
+//        stringObjectMap.put("client_id",client_id);
+//        stringObjectMap.put("scope",scope);
+        logger.info("url信息："+JSON.toJSONString(url));
+        stringObjectMap.put("url",substringUrl);
         logger.info("session信息"+httpSession.getAttribute("SPRING_SECURITY_SAVED_REQUEST"));;
         logger.info("--------结束------");
         response.getWriter().write(JSON.toJSONString(RespBean.ok(stringObjectMap)));

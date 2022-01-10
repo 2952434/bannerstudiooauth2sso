@@ -22,8 +22,32 @@ spring:
       test-on-return: false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
-#  redis:
-#    host: 127.0.0.1
-#    port: 6379
+
+  #  邮箱
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 2952434583@qq.com
+    password: spmkmsoighssdhdd
+    default-encoding: UTF-8
+    properties:
+      smtp:
+        socketFactoryClass: javax.net.ssl.SSLSocketFactory
+      debug: true
+
+  #redis
+  redis:
+    host: 82.157.145.197
+    port: 6379
+    database: 0
+    password: asd.123
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 0
+
   main:
     allow-bean-definition-overriding: true

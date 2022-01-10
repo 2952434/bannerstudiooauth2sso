@@ -1,0 +1,116 @@
+body {
+  overflow: hidden;
+}
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body p {
+  margin: 0;
+  padding: 0;
+}
+ul,
+li {
+  list-style: none;
+}
+.starlight {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+.header {
+  width: 100%;
+  height: 50px;
+  background-color: #51b7ec;
+}
+.header .logo {
+  float: left;
+  width: 50px;
+  height: 50px;
+  margin-left: 185px;
+}
+.header img {
+  width: 100%;
+  height: 100%;
+}
+.header .text {
+  float: left;
+  font-size: 25px;
+  margin-left: 10px;
+  line-height: 50px;
+}
+.container {
+  margin-top: 80px;
+  border: 2px solid #9ea1a5;
+}
+.container .bgc {
+  height: 100px;
+  background-color: #fff3f3;
+}
+.container .bgc p {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 100px;
+  padding-left: 50px;
+}
+.container .row .content {
+  margin-top: 30px;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+}
+.container .row .content .one {
+  margin-top: 20px;
+}
+.container .row .content .one label {
+  font-weight: 300;
+  cursor: pointer;
+}
+.container .row .content p {
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  font-weight: 300;
+  border-top: 2px dashed #ccc;
+}
+.container .row .content p label {
+  font-weight: 300;
+  cursor: pointer;
+}
+.container .row .content .end {
+  border-bottom: 2px dashed #ccc;
+}
+.container .row .left {
+  margin-left: 440px;
+}
+.container .last {
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+.banner {
+  position: relative;
+  margin-top: 60px;
+  width: 100%;
+  height: 100px;
+  background-color: #51b7ec;
+}
+.banner ul {
+  position: absolute;
+  top: 40%;
+  left: 25%;
+}
+.banner ul li {
+  float: left;
+  margin: 0 20px;
+}
+.banner ul li a {
+  text-decoration: none;
+  color: azure;
+}
+.banner ul li a:hover {
+  color: aquamarine;
+}
+/*# sourceMappingURL=center.css.map */

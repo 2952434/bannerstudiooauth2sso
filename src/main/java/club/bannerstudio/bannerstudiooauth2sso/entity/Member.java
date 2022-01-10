@@ -108,25 +108,25 @@ public class Member {
     private String personalizedSignature;
 
     /**
-     * 用户QQ号
+     * 成员QQ号
      */
     @NotNull(message = "成员QQ号不能为空")
     @TableField(value = "usersQQ")
     private String memberQQ;
     /**
-     * 用户微信号
+     * 成员微信号
      */
     @NotNull(message = "成员微信号不能为空")
     @TableField(value = "usersWeChat")
     private String memberWeChat;
     /**
-     * 用户公司
+     * 成员公司
      */
     @NotNull(message = "成员公司不能为空")
     @TableField(value = "usersCompany")
     private String memberCompany;
     /**
-     * 用户的工作
+     * 成员的工作
      */
     @NotNull(message = "成员的工作不能为空")
     @TableField(value = "usersWork")
@@ -138,10 +138,17 @@ public class Member {
     @TableField(value = "usersAddress")
     private String memberAddress;
     /**
-     * 用户薪资
+     * 成员薪资
      */
     @NotNull(message = "成员薪资不能为空")
     @TableField(value = "usersPay")
     private Integer memberPay;
+
+    /**
+     * 成员自我介绍
+     */
+    @NotNull(message = "自我介绍不能为空")
+    @TableField(value = "personalIntroduction")
+    private String personalIntroduction;
 
 }

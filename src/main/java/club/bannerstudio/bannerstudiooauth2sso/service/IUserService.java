@@ -14,7 +14,21 @@ import java.util.List;
 public interface IUserService {
 
     /**
-     *增加用户
+     * 根据邮箱发送验证码
+     * @param email
+     * @return RespBean
+     */
+    RespBean sendCodeByEmail(String email);
+    /**
+     * 用户注册
+     * @param user
+     * @param code
+     * @return RespBean
+     */
+    RespBean insertUser(User user, String code);
+
+    /**
+     *管理员增加用户
      * @param user
      * @return RespBean
      */
@@ -49,4 +63,22 @@ public interface IUserService {
      * @return RespBean
      */
     RespBean selectUserListByPage(Integer pageNumber, Integer pageSize);
+
+    /**
+     * 根据email发送验证码
+     * @param userName
+     * @param email
+     * @return
+     */
+    RespBean sendCodeByEmail(String userName, String email);
+    /**
+     * 忘记密码
+     * @param userName
+     * @param email
+     * @param newPassword
+     * @param rPassword
+     * @param code
+     * @return RespBean
+     */
+    RespBean forgetPassword(String userName,String email,String newPassword,String rPassword,String code);
 }

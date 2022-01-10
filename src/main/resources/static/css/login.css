@@ -36,8 +36,8 @@
 }
 .whole .login .content .remember {
   position: absolute;
-  top: 62%;
-  left: 22%;
+  top: 88%;
+  left: 0%;
 }
 .whole .login .content .remember label {
   cursor: pointer;
@@ -64,13 +64,13 @@
 }
 .whole .login .content .forget {
   position: absolute;
-  bottom: 75px;
+  bottom: -40px;
   left: 65%;
 }
 .whole .login .content .denglu {
   position: absolute;
-  bottom: 35px;
-  left: 22%;
+  bottom: -85px;
+  left: 0%;
   width: 270px;
   border-radius: 12px;
 }
@@ -132,45 +132,44 @@
   margin-bottom: 20px;
   width: 270px;
 }
-.whole .login11 .content1 .inputFour1 {
-  position: absolute;
-  top: 370px;
-  left: 22%;
-  margin-bottom: 20px;
-  width: 270px;
+.whole .login11 .content1 .end {
+  margin-bottom: 0px;
 }
-.whole .login11 .content1 .inputFour1 .yanone1,
-.whole .login11 .content1 .inputFour1 .yantwo1 {
+.whole .login11 .content1 .yanone1,
+.whole .login11 .content1 .yantwo1 {
   height: 40px;
 }
-.whole .login11 .content1 .inputFour1 .yanone1 {
+.whole .login11 .content1 .yanone1 {
   width: 123px;
-  margin-right: 10px;
+  margin-left: -110px;
   border: 1px solid #DCDFE6;
   border-radius: 4px;
   padding: 0 15px;
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.whole .login11 .content1 .inputFour1 .yanone1:hover {
+.whole .login11 .content1 .yanone1:hover {
   border-color: #9ea1a5;
 }
-.whole .login11 .content1 .inputFour1 .yantwo1 {
+.whole .login11 .content1 .yantwo1 {
+  position: absolute;
+  left: 63%;
+  top: 1%;
   width: 100px;
   border-radius: 4px;
   border: 1px solid #DCDFE6;
   transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-.whole .login11 .content1 .inputFour1 .count {
+.whole .login11 .content1 .count {
   background-color: rgba(239, 239, 239);
 }
-.whole .login11 .content1 .zhuceOne1 {
+.whole .login11 .zhuceOne1 {
   position: absolute;
-  bottom: 30px;
-  left: 22%;
+  bottom: -75px;
+  left: 0%;
   width: 270px;
   border-radius: 12px;
 }
-.whole .login11 .content1 .zhuce1 {
+.whole .login11 .zhuce1 {
   position: absolute;
   right: 0;
   width: 170px;
