@@ -37,6 +37,10 @@ public class UserController {
     @ApiImplicitParam(type = "query",name = "email",
             value = "用户邮箱",required = true,dataTypeClass = String.class)
     public RespBean sendCodeByEmail(String email) {
+        if (email==null){
+            logger.error("email为空");
+            return RespBean.error("email为空");
+        }
         String judge = "(^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$)";
         if (!email.matches(judge)) {
             logger.error("邮箱不符合要求");
@@ -211,7 +215,7 @@ public class UserController {
         return iUserService.selectUserListByPage(pageNumber, pageSize);
     }
 
-    @PostMapping("/send/code")
+    @PostMapping("/user/sendCode")
     @ApiOperation(value = "通过邮箱发送验证码")
     @ApiImplicitParams({
             @ApiImplicitParam(type = "query",name = "userName",
@@ -229,7 +233,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/forget/password")
+    @PostMapping("/user/forgetPassword")
     @ApiOperation(value = "忘记密码")
     @ApiImplicitParams({
             @ApiImplicitParam(type = "query",name = "userName",

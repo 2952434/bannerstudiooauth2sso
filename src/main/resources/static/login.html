@@ -305,10 +305,48 @@
                 //     this.$message.error('登录失败,您的输入有误')
                 // }
             },
-            getCode(){},
-            login3Click(){},
+            getCode1(){
+                var formData = new FormData();
+                formData.append("email",this.ruleForm1.email);
+                axios({
+                    method:'POST',
+                    url:'/user/code',
+                    data:formData,
+                    headers:{
+                        'Accept':'application/json, text/javascript, */*; q=0.01',
+                        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+                    }
+                }).then(res=>{
+                    console.log(res.data)
+                    // console.log(res.data.status)
+                }).catch(err => {
+                    console.log(err) // 后台报错返回
+                })
+            },
+            login3Click(){
+                var formData = new FormData();
+                formData.append("userName",this.ruleForm1.username);
+                formData.append("email",this.ruleForm1.email);
+                formData.append("password",this.ruleForm1.pass);
+                formData.append("phone",this.ruleForm1.phone);
+                formData.append("code",this.ruleForm1.code1)
+                axios({
+                    method:'POST',
+                    url:'/user/register',
+                    data:formData,
+                    headers:{
+                        'Accept':'application/json, text/javascript, */*; q=0.01',
+                        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+                    }
+                }).then(res=>{
+                    console.log(res.data)
+                    // console.log(res.data.status)
+                }).catch(err => {
+                    console.log(err) // 后台报错返回
+                })
+            },
             findPass(){},
-            getCode1(){},
+            getCode(){},
         },
         created() {
 

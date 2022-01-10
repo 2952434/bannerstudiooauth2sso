@@ -80,7 +80,7 @@ public class UserServiceImpl implements IUserService {
             logger.error("系统异常，插入失败");
             return  RespBean.error("系统异常，插入失败");
         }
-        logger.info("您输入的数据已经存在，插入失败");
+        logger.error("您输入的数据已经存在，插入失败");
         return  RespBean.error("您输入的数据已经存在，插入失败");
     }
 
