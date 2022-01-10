@@ -31,6 +31,11 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     protected UserMapper userMapper;
 
+    /**
+     *增加用户
+     * @param user
+     * @return RespBean
+     */
     @Override
     public RespBean insertUser(User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -49,6 +54,11 @@ public class UserServiceImpl implements IUserService {
         return  RespBean.error("您输入的数据已经存在，插入失败");
     }
 
+    /**
+     * 根据id删除用户
+     * @param id
+     * @return RespBean
+     */
     @Override
     public RespBean deleteUser(Integer id) {
         if (userMapper.deleteById(id) != 0){
@@ -59,6 +69,11 @@ public class UserServiceImpl implements IUserService {
         return RespBean.error("系统异常，删除失败");
     }
 
+    /**
+     * 更改User
+     * @param user
+     * @return RespBean
+     */
     @Override
     public RespBean updateUser(User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -77,6 +92,11 @@ public class UserServiceImpl implements IUserService {
         return RespBean.error("您要更新的数据不存在，更新失败");
     }
 
+    /**
+     * 根据邮箱查询用户数据
+     * @param userName
+     * @return RespBean
+     */
     @Override
     public RespBean selectUserByUserName(String userName) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -90,6 +110,12 @@ public class UserServiceImpl implements IUserService {
         return RespBean.error("查询失败");
     }
 
+    /**
+     * 分页查询用户数据
+     * @param pageNumber
+     * @param pageSize
+     * @return RespBean
+     */
     @Override
     public RespBean selectUserListByPage(Integer pageNumber, Integer pageSize) {
         Page<User> page = new Page<>(pageNumber, pageSize);

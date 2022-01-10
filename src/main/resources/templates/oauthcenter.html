@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>旗帜软件工作室授权中心</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="shortcut icon" href="../img/favicon.ico" />
+    <link rel="stylesheet" href="../css/center.css">
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<!--    引入bootstrap-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script type="text/javascript" src="https://repo.bfw.wiki/bfwrepo/js/jquery-3.2.1.min.js"></script>
+</head>
+<body class="starlight">
+<div id="app">
+    <div class="header">
+        <div class="logo"><img src="../img/favicon.ico" alt=""></div>
+        <div class="text">旗帜软件工作室授权中心</div>
+    </div>
+    <div class="container">
+        <div class="row bgc">
+            <p>应用授权</p>
+        </div>
+        <div class="row">
+            <div class="content">sixsixsix应用请求授权,该应用将获取你以下信息:
+                <p class="one">
+                    <input type="checkbox" name="remember" id="all" style="width: 14px;height: 14px" checked><label for="all">全选</label>
+                </p>
+                <p>
+                    <input type="checkbox" name="remember2" id="only" style="width: 14px;height: 14px" disabled checked><label for="only">昵称、头像、性别</label>
+                </p>
+                <p class="end">授权后表明你已同意 <a href="javascript:;">旗帜软件工作室服务协议</a></p>
+            </div>
+        </div>
+        <div class="row last">
+        <el-button type="primary" class="left">快速安全登录</el-button>
+            <el-button type="info" @click="golast">返回登录页面</el-button>
+        </div>
+    </div>
+    <div class="banner">
+        <ul>
+            <li><a href="javascript:;">工作室官网</a></li>
+            <li>|</li>
+            <li><a href="javascript:;">意见反馈</a></li>
+            <li>|</li>
+            <li><a href="javascript:;">工作室面试</a></li>
+            <li>|</li>
+            <li><a href="javascript:;">工作室博客</a></li>
+            <li>|</li>
+            <li><a href="javascript:;">工作室论坛</a></li>
+        </ul>
+    </div>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data:function () {
+            return {
+
+            }
+        },
+        methods: {
+            golast() {
+                window.location.href='login.html'
+            }
+        },
+        mounted() {
+
+        },
+        created() {
+
+        }
+
+    })
+</script>
+<script type="text/javascript" src="https://repo.bfw.wiki/bfwrepo/js/starlight.js"></script>
+</body>
+</html>

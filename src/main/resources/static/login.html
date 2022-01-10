@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>旗帜软件工作室统一授权中心</title>
+    <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/login.css">
     <link rel="shortcut icon" href="./img/favicon.ico" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
@@ -10,19 +11,19 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- 引入组件库 -->
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://unpkg.com/vue-router@2.0.0/dist/vue-router.js"></script>
-    <!--    <script type="module">import {Message} from 'element-ui'</script>-->
 </head>
 <body>
 <div id="app">
     <div class="whole">
     <!--    登录-->
     <div class="login" v-show="show3">
+        <el-form>
         <div class="content">
             <div class="header">
+                <h1>旗帜软件工作室统一授权中心</h1>
                 <h2>欢迎登录</h2>
             </div>
+            <div class="remember"><input type="checkbox" name="remember" id="me" style="width: 14px;height: 14px"><label for="me">记住我</label></div>
             <div class="register">
                 没有账号？<el-button type="text" @click="register1">点击注册</el-button>
             </div>
@@ -32,32 +33,27 @@
                             prop="email"
                             label=""
                             :rules="[
-      { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+      { required: true, message: '请输入用户名', trigger: 'blur' },
       { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
     ]">
                         <el-input v-model="ruleForm.email" autocomplete="off" placeholder="请输入邮箱" ref="adminname"></el-input>
                     </el-form-item>
+                </el-form>
+            </div>
+            <div class="inputtwo">
+                <el-form :model="ruleForm" ref="dynamicValidateForm" label-width="0px" class="demo-dynamic">
                     <el-form-item
                             prop="pass">
                         <el-input placeholder="请输入密码" v-model="ruleForm.pass" show-password ref="adminword"></el-input>
                     </el-form-item>
-                    <el-button type="primary" @click="handleLogin" class="denglu">登录</el-button>
                 </el-form>
-
             </div>
-<!--            <div class="inputtwo">-->
-<!--                <el-form :model="ruleForm" ref="dynamicValidateForm" label-width="0px" class="demo-dynamic">-->
-<!--&lt;!&ndash;                    <el-form-item&ndash;&gt;-->
-<!--&lt;!&ndash;                            prop="pass">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <el-input placeholder="请输入密码" v-model="ruleForm.pass" show-password ref="adminword"></el-input>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </el-form-item>&ndash;&gt;-->
-<!--                </el-form>
-            </div>-->
             <div class="forget">
                 <el-button type="text" @click="forget">忘记密码?</el-button>
             </div>
-            <!--      <el-button type="primary" @click="" class="zhuce">注册</el-button>-->
+            <el-button type="primary" @click="homepageClick" class="denglu">登录</el-button>
         </div>
+        </el-form>
     </div>
     <!--    :close-on-click-modal="false"-->
     <div>
@@ -104,19 +100,22 @@
                 已有账号？<el-button type="text" @click="login3">点击登录</el-button>
             </div>
             <div class="inputone1">
-                <el-input v-model="user_name" placeholder="请输入姓名" ref="adminname"></el-input>
+                <el-input v-model="user_name" placeholder="请输入用户名" ref="adminname"></el-input>
             </div>
             <div class="inputtwo1">
                 <el-form :model="ruleForm1" ref="dynamicValidateForm" label-width="0px" class="demo-dynamic">
-
-<!--                    :rules="[-->
-<!--                    { required: true, message: '请输入邮箱地址', trigger: 'blur' },-->
-<!--                    { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }-->
                     <el-form-item
                             prop="email"
                             label=""
+                            :rules="[
+      { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+      { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+    ]"
                     >
                         <el-input v-model="ruleForm1.email" autocomplete="off" placeholder="请输入邮箱"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-input v-model="ruleForm1.phone" autocomplete="off" placeholder="请输入手机号"></el-input>
                     </el-form-item>
                 </el-form>
             </div>
@@ -200,6 +199,7 @@
                 //注册
                 ruleForm1 : {
                     email : '',
+                    phone : '',
                     pass: '',
                     checkPass: '',
                 },
@@ -240,6 +240,9 @@
                 }
             }
         },
+        mounted() {
+
+        },
         methods:{
             register1() {
                 this.show3 = false
@@ -256,49 +259,26 @@
                 this.form.checkPasss=''
                 this.dialogFormVisible2 = !this.dialogFormVisible2
             },
-            handleLogin() {
-                // let url=
-                // 表单的手动校验
-                // this.$refs.dynamicValidateForm.validate(async valid => {
-                //     if (valid) {
-                axios.defaults.withCredentials = true;
-                console.log(this.ruleForm.email)
-                console.log(this.ruleForm.pass)
-                var formData = new FormData();
-                formData.append("username",this.ruleForm.email);
-                formData.append("password",this.ruleForm.pass);
-                        axios({
-                            method:'POST',
-                            url:'/login',
-                            data:formData,
-                            headers:{
-                                'Accept':'application/json, text/javascript, */*; q=0.01',
-                                'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
-                     }
-            }).then(res=>{
-                console.log(res.data)
-                 console.log(res.data.status)
-                            if (res.data.status===200){
-                                console.log(res.data.obj.session)
-                                let ajaxSession=res.data.obj.session
-                axios({
-                    method:'POST',
-                    url:'/oauth/getJson'
-                }).then(res=>{
-                    console.log(res.data)
-                }).catch(err=>{
-                    console.log(err.data)
-                    }
-                )}
-                        }).catch(err => {
-                            console.log(err) // 后台报错返回
-                        })
+            homepageClick() {
+                if (this.ruleForm.email ==='123@qq.com' && this.ruleForm.pass === '123') {
+                    this.$message({
+                        type: 'success',
+                        message: '登录成功!'
+                    })
+                    window.location.href="center.html"
+                }else {
+                    this.$message.error('登录失败,您的输入有误')
+                }
             },
             getCode(){},
             login3Click(){},
             findPass(){},
             getCode1(){},
         },
+        created() {
+
+        }
+
     })
 </script>
 </body>

@@ -30,6 +30,12 @@ public class OauthClientDetailsServiceImpl implements IOauthClientDetailsService
 
     @Autowired
     protected OauthClientDetailsMapper oauthClientDetailsMapper;
+
+    /**
+     * 增加授权信息
+     * @param oauthClientDetails
+     * @return RespBean
+     */
     @Override
     public RespBean insertOauthClientDetails(OauthClientDetails oauthClientDetails) {
         QueryWrapper<OauthClientDetails> queryWrapper = new QueryWrapper<>();
@@ -48,23 +54,27 @@ public class OauthClientDetailsServiceImpl implements IOauthClientDetailsService
         return  RespBean.error("您输入的数据已经存在，插入失败");
     }
 
+    /**
+     * 根据客户端id删除授权信息
+     * @param clientId
+     * @return RespBean
+     */
     @Override
     public RespBean deleteOauthClientDetails(String clientId) {
-        QueryWrapper<OauthClientDetails> queryWrapper = new QueryWrapper<>();
-        queryWrapper = queryWrapper.eq("client_id", clientId);
-        List<OauthClientDetails> list = oauthClientDetailsMapper.selectList(queryWrapper);
-        if (list != null) {
-            if (oauthClientDetailsMapper.deleteById(queryWrapper) != 0){
+            if (oauthClientDetailsMapper.deleteById(clientId) != 0){
                 logger.info("删除成功");
                 return RespBean.ok("删除成功");
             }
-            logger.error("系统异常，删除失败");
-            return RespBean.error("系统异常，删除失败");
-        }
-        logger.info("您要删除的数据不存在，删除失败");
-        return RespBean.error("您要删除的数据不存在，删除失败");
+            logger.error("您要删除的数据不存在，删除失败");
+            return RespBean.error("您要删除的数据不存在，删除失败");
+
     }
 
+    /**
+     * 更改授权信息
+     * @param oauthClientDetails
+     * @return RespBean
+     */
     @Override
     public RespBean updateOauthClientDetails(OauthClientDetails oauthClientDetails) {
         QueryWrapper<OauthClientDetails> queryWrapper = new QueryWrapper<>();
@@ -83,6 +93,11 @@ public class OauthClientDetailsServiceImpl implements IOauthClientDetailsService
         return RespBean.error("您要更新的数据不存在，更新失败");
     }
 
+    /**
+     * 根据客户端id查询授权信息
+     * @param clientId
+     * @return RespBean
+     */
     @Override
     public RespBean selectOauthClientDetailsByClientId(String clientId) {
         QueryWrapper<OauthClientDetails> queryWrapper = new QueryWrapper<>();
@@ -96,6 +111,12 @@ public class OauthClientDetailsServiceImpl implements IOauthClientDetailsService
         return RespBean.error("查询失败");
     }
 
+    /**
+     * 分页查询客户端授权信息
+     * @param pageNumber
+     * @param pageSize
+     * @return RespBean
+     */
     @Override
     public RespBean selectOauthClientDetailsByPage(Integer pageNumber, Integer pageSize) {
         Page<OauthClientDetails> page = new Page<>(pageNumber, pageSize);

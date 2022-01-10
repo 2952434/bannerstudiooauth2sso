@@ -3,6 +3,10 @@ package club.bannerstudio.bannerstudiooauth2sso.controller;
 import club.bannerstudio.bannerstudiooauth2sso.entity.User;
 import club.bannerstudio.bannerstudiooauth2sso.service.IUserService;
 import club.bannerstudio.bannerstudiooauth2sso.utils.RespBean;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,7 @@ import java.util.Map;
  */
 
 @RestController
+@Api(tags = "用户信息管理", value = "UserController")
 public class UserController {
     protected static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -28,14 +33,23 @@ public class UserController {
     protected IUserService iUserService;
 
 
-    /**
-     * 用户注册接口
-     * @param user
-     * @param bindingResult
-     * @return RespBean
-     */
     @PostMapping("/register")
-   public  RespBean registerUser(@Valid User user, BindingResult bindingResult) {
+    @ApiOperation(value = "用户注册接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(type = "query", name = "id",
+                    value = "主键id", required = false, dataTypeClass = Integer.class),
+            @ApiImplicitParam(type = "query", name = "userName",
+                    value = "用户名", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "password",
+                    value = "用户密码", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "email",
+                    value = "用户邮箱", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "phone",
+                    value = "用户手机号", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "role",
+                    value = "用户权限", required = true, dataTypeClass = String.class)
+    })
+    public RespBean registerUser(@Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, Object> map = new HashMap<>();
             List<FieldError> errors = bindingResult.getFieldErrors();
@@ -48,18 +62,27 @@ public class UserController {
             return RespBean.error(map);
         }
         user.setRole("ROLE_User");
-      return  iUserService.insertUser(user);
+        return iUserService.insertUser(user);
     }
 
 
-    /**
-     * 管理员增加用户接口
-     * @param user
-     * @param bindingResult
-     * @return RespBean
-     */
     @PostMapping("/admin/user")
-    public  RespBean insertIntranetUser(@Valid User user, BindingResult bindingResult) {
+    @ApiOperation(value = "管理员增加用户接口")
+    @ApiImplicitParams({
+            @ApiImplicitParam(type = "query", name = "id",
+                    value = "主键id", required = false, dataTypeClass = Integer.class),
+            @ApiImplicitParam(type = "query", name = "userName",
+                    value = "用户名", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "password",
+                    value = "用户密码", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "email",
+                    value = "用户邮箱", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "phone",
+                    value = "用户手机号", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "role",
+                    value = "用户权限", required = true, dataTypeClass = String.class)
+    })
+    public RespBean insertIntranetUser(@Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, Object> map = new HashMap<>();
             List<FieldError> errors = bindingResult.getFieldErrors();
@@ -71,55 +94,62 @@ public class UserController {
             }
             return RespBean.error(map);
         }
-        if ("IntranetUser".equals(user.getRole())){
+        if ("IntranetUser".equals(user.getRole())) {
             user.setRole("ROLE_IntranetUser");
-            return  iUserService.insertUser(user);
-        }else if ("InterViewUser".equals(user.getRole())){
+            return iUserService.insertUser(user);
+        } else if ("InterViewUser".equals(user.getRole())) {
             user.setRole("ROLE_InterViewUser");
-            return  iUserService.insertUser(user);
-        }else if ("AdminUser".equals(user.getRole())){
+            return iUserService.insertUser(user);
+        } else if ("AdminUser".equals(user.getRole())) {
             user.setRole("ROLE_AdminUser");
-            return  iUserService.insertUser(user);
-        }else if ("User".equals(user.getRole())){
+            return iUserService.insertUser(user);
+        } else if ("User".equals(user.getRole())) {
             user.setRole("ROLE_User");
-            return  iUserService.insertUser(user);
-        }else {
+            return iUserService.insertUser(user);
+        } else {
             logger.error("您插入的用户权限有误，请重新输入");
             return RespBean.error("您插入的用户权限有误，请重新输入");
         }
     }
 
 
-    /**
-     * 根据id删除用户信息
-     * @param id
-     * @return RespBean
-     */
     @DeleteMapping("/admin/user/{id}")
-    public RespBean deleteUser( @PathVariable("id") String id){
-        if (id==null){
+    @ApiOperation(value = "根据id删除用户信息")
+    @ApiImplicitParam(type = "query", name = "id",
+            value = "主键id", required = true, dataTypeClass = String.class)
+    public RespBean deleteUser(@PathVariable("id") String id) {
+        if (id == null) {
             logger.error("您输入的数据为空，请重新输入");
             return RespBean.error("您输入的数据为空，请重新输入");
         }
         System.out.println(id);
-        Integer returnId=null;
+        Integer returnId = null;
         try {
-           returnId=Integer.parseInt(id);
-        }catch (Exception exception){
+            returnId = Integer.parseInt(id);
+        } catch (Exception exception) {
             logger.error("您传入的id不合法，请重新输入");
             return RespBean.error("您传入的id不合法，请重新输入");
         }
-       return iUserService.deleteUser(returnId);
+        return iUserService.deleteUser(returnId);
     }
 
-    /**
-     * 更改用户信息
-     * @param user
-     * @param bindingResult
-     * @return RespBean
-     */
     @PutMapping("/admin/user")
-    public  RespBean updateUser(@Valid User user, BindingResult bindingResult){
+    @ApiOperation(value = "更改用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(type = "query", name = "id",
+                    value = "主键id", required = false, dataTypeClass = Integer.class),
+            @ApiImplicitParam(type = "query", name = "userName",
+                    value = "用户名", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "password",
+                    value = "用户密码", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "email",
+                    value = "用户邮箱", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "phone",
+                    value = "用户手机号", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query", name = "role",
+                    value = "用户权限", required = true, dataTypeClass = String.class)
+    })
+    public RespBean updateUser(@Valid User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, Object> map = new HashMap<>();
             List<FieldError> errors = bindingResult.getFieldErrors();
@@ -131,39 +161,39 @@ public class UserController {
             }
             return RespBean.error(map);
         }
-        if ("IntranetUser".equals(user.getRole())){
+        if ("IntranetUser".equals(user.getRole())) {
             user.setRole("ROLE_IntranetUser");
-            return  iUserService.updateUser(user);
-        }else if ("InterViewUser".equals(user.getRole())){
+            return iUserService.updateUser(user);
+        } else if ("InterViewUser".equals(user.getRole())) {
             user.setRole("ROLE_InterViewUser");
-            return  iUserService.updateUser(user);
-        }else if ("AdminUser".equals(user.getRole())){
+            return iUserService.updateUser(user);
+        } else if ("AdminUser".equals(user.getRole())) {
             user.setRole("ROLE_AdminUser");
-            return  iUserService.updateUser(user);
-        }else{
+            return iUserService.updateUser(user);
+        } else {
             logger.error("您插入的用户权限有误，请重新输入");
             return RespBean.error("您插入的用户权限有误，请重新输入");
         }
     }
 
-    /**
-     * 根据用户名查询用户信息
-     * @param userName
-     * @return RespBean
-     */
+
     @GetMapping("/admin/user/{userName}")
-    public  RespBean selectUserByUserName(@PathVariable("userName") String userName){
-     return   iUserService.selectUserByUserName(userName);
+    @ApiOperation(value = "根据用户名查询用户信息")
+    @ApiImplicitParam(type = "query", name = "userName",
+            value = "用户名", required = true, dataTypeClass = String.class)
+    public RespBean selectUserByUserName(@PathVariable("userName") String userName) {
+        return iUserService.selectUserByUserName(userName);
     }
 
-    /**
-     * 分页查询所有用户信息
-     * @param pageNumber
-     * @param pageSize
-     * @return RespBean
-     */
     @GetMapping("/admin/user")
-    public  RespBean selectUserListByPage(@RequestParam Integer pageNumber, @RequestParam Integer pageSize){
-        return iUserService.selectUserListByPage(pageNumber,pageSize);
+    @ApiOperation(value = "分页查询所有用户信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(type = "query", name = "pageNumber",
+                    value = "第几页", required = true, dataTypeClass = Integer.class),
+            @ApiImplicitParam(type = "query", name = "pageSize",
+                    value = "每页几条信息", required = true, dataTypeClass = Integer.class)
+    })
+    public RespBean selectUserListByPage(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
+        return iUserService.selectUserListByPage(pageNumber, pageSize);
     }
-    }
+}
