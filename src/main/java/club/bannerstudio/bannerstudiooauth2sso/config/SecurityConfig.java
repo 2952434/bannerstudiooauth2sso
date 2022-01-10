@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/login.html", "/css/**", "/js/**", "/images/**","/favicon.ico","/register");
+        web.ignoring().antMatchers("/login.html", "/css/**", "/js/**", "/images/**","/favicon.ico","/register");
 //        放行swagger和knife4j
 //        web.ignoring().antMatchers("/swagger/**")
 //                .antMatchers("/swagger-ui.html")
@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/v2/api-docs-ext/**")
 //                .antMatchers("/swagger-resources/**")
 //                .antMatchers("/doc.html");
-        web.ignoring().antMatchers("/**");
+//        web.ignoring().antMatchers("/**");
 
     }
     @Override

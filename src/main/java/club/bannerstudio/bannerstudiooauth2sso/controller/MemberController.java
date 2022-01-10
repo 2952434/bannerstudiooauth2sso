@@ -195,4 +195,13 @@ public class MemberController {
     public RespBean selectMemberListByPage(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
         return iMemberService.selectMemberListByPage(pageNumber, pageSize);
     }
+
+
+    @GetMapping("/member/head")
+    @ApiOperation(value = "根据用户名查询用户头像")
+    @ApiImplicitParam(type = "query",name = "userName",
+            value = "用户名",required = true,dataTypeClass = String.class)
+    public RespBean selectHeadUrlByUserName(@RequestParam String userName) {
+        return iMemberService.selectHeadUrlByUserName(userName);
+    }
 }

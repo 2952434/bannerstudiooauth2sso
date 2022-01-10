@@ -32,8 +32,20 @@ public class UserController {
     @Autowired
     protected IUserService iUserService;
 
+    @PostMapping("/user/code")
+    @ApiOperation(value = "用户注册时发送验证码")
+    @ApiImplicitParam(type = "query",name = "email",
+            value = "用户邮箱",required = true,dataTypeClass = String.class)
+    public RespBean sendCodeByEmail(String email) {
+        String judge = "(^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$)";
+        if (!email.matches(judge)) {
+            logger.error("邮箱不符合要求");
+            return RespBean.error("邮箱不符合要求");
+        }
+        return iUserService.sendCodeByEmail(email);
+    }
 
-    @PostMapping("/register")
+    @PostMapping("/user/register")
     @ApiOperation(value = "用户注册接口")
     @ApiImplicitParams({
             @ApiImplicitParam(type = "query", name = "id",
@@ -47,9 +59,11 @@ public class UserController {
             @ApiImplicitParam(type = "query", name = "phone",
                     value = "用户手机号", required = true, dataTypeClass = String.class),
             @ApiImplicitParam(type = "query", name = "role",
-                    value = "用户权限", required = true, dataTypeClass = String.class)
+                    value = "用户权限", required = true, dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query",name = "code",
+                    value = "验证码",required = true,dataTypeClass = String.class)
     })
-    public RespBean registerUser(@Valid User user, BindingResult bindingResult) {
+    public RespBean registerUser(@Valid User user,@RequestParam String code, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             Map<String, Object> map = new HashMap<>();
             List<FieldError> errors = bindingResult.getFieldErrors();
@@ -62,7 +76,7 @@ public class UserController {
             return RespBean.error(map);
         }
         user.setRole("ROLE_User");
-        return iUserService.insertUser(user);
+        return iUserService.insertUser(user,code);
     }
 
 
@@ -195,5 +209,51 @@ public class UserController {
     })
     public RespBean selectUserListByPage(@RequestParam Integer pageNumber, @RequestParam Integer pageSize) {
         return iUserService.selectUserListByPage(pageNumber, pageSize);
+    }
+
+    @PostMapping("/send/code")
+    @ApiOperation(value = "通过邮箱发送验证码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(type = "query",name = "userName",
+                    value = "用户名",required = true,dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query",name = "email",
+                    value = "该用户名注册时邮箱",required = true,dataTypeClass = String.class)
+    })
+    public RespBean sendCodeByEmail(@RequestParam String userName,@RequestParam String email) {
+        String judge = "(^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$)";
+        if (!email.matches(judge)) {
+            logger.error("邮箱不符合要求");
+            return RespBean.error("邮箱不符合要求");
+        }else {
+            return iUserService.sendCodeByEmail(userName,email);
+        }
+    }
+
+    @PostMapping("/forget/password")
+    @ApiOperation(value = "忘记密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(type = "query",name = "userName",
+                    value = "用户名",required = true,dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query",name = "email",
+                    value = "该用户名注册时邮箱",required = true,dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query",name = "newPassword",
+                    value = "新密码",required = true,dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query",name = "rPassword",
+                    value = "再次输入新密码",required = true,dataTypeClass = String.class),
+            @ApiImplicitParam(type = "query",name = "code",
+                    value = "验证码(有效时长3分钟)",required = true,dataTypeClass = String.class)
+    })
+    public RespBean forgetPassword(String userName, String email, String newPassword, String rPassword, String code) {
+        String judge = "(^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,4}$)";
+        if (!email.matches(judge)) {
+            logger.error("邮箱不符合要求");
+            return RespBean.error("邮箱不符合要求");
+        }
+        String judge1 = "(^[a-zA-Z]\\w{5,17}$)";
+        if (!newPassword.matches(judge1)&&!rPassword.matches(judge1)) {
+            logger.error("密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)");
+            return RespBean.error("密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)");
+        }
+        return iUserService.forgetPassword(userName, email, newPassword, rPassword, code);
     }
 }

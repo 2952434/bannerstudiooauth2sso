@@ -1,7 +1,9 @@
 package club.bannerstudio.bannerstudiooauth2sso.service.impl;
 
 import club.bannerstudio.bannerstudiooauth2sso.entity.Member;
+import club.bannerstudio.bannerstudiooauth2sso.entity.User;
 import club.bannerstudio.bannerstudiooauth2sso.mapper.MemberMapper;
+import club.bannerstudio.bannerstudiooauth2sso.mapper.UserMapper;
 import club.bannerstudio.bannerstudiooauth2sso.service.IMemberService;
 import club.bannerstudio.bannerstudiooauth2sso.utils.RespBean;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -24,6 +26,8 @@ public class MemberServiceImpl implements IMemberService {
 
     @Autowired
     protected MemberMapper memberMapper;
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * 增加成员数据
@@ -119,5 +123,25 @@ public class MemberServiceImpl implements IMemberService {
         Page<Member> page = new Page<>(pageNumber, pageSize);
         IPage<Member> memberIPage =memberMapper.selectPage(page, null);
         return RespBean.ok("查询成功",memberIPage);
+    }
+
+    @Override
+    public RespBean selectHeadUrlByUserName(String userName) {
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.eq("userName",userName);
+        List<User> users = userMapper.selectList(userQueryWrapper);
+        if (users.size()==0){
+            logger.error("该用户不存在");
+            return RespBean.error("该用户不存在");
+        }
+        QueryWrapper<Member> memberQueryWrapper = new QueryWrapper<>();
+        memberQueryWrapper.eq("userId",users.get(0).getId());
+        List<Member> members = memberMapper.selectList(memberQueryWrapper);
+        if (members.size()==0){
+            logger.error("该成员不存在");
+            return RespBean.error("该成员不存在");
+        }
+        logger.info("该成员头像地址为："+members.get(0).getHeadPortraitUrl());
+        return RespBean.ok("该成员头像地址为：",members.get(0).getHeadPortraitUrl());
     }
 }
