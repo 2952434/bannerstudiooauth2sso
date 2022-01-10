@@ -52,21 +52,22 @@ public class AuthAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
         logger.info("substringUrl："+substringUrl);
         Map<String,String> stringMap=new HashMap<>();
         Map<String,Object> stringObjectMap=new HashMap<>();
-        if (authority.equals("ROLE_User")){
-            substringUrl+="&username"+userName+"&authority"+"用户";
-            stringObjectMap.put("url",substringUrl);
-//            stringMap.put("userName",userName);
-//            stringMap.put("authority","用户");
-        }else if (authority.equals("ROLE_IntranetUser")){
-            substringUrl+="&username"+userName+"&authority"+"工作室内部成员";
-            stringObjectMap.put("url",substringUrl);
-        }else if (authority.equals("ROLE_InterViewUser")){
-            substringUrl+="&username"+userName+"&authority"+"工作室面试官成员";
-            stringObjectMap.put("url",substringUrl);
-        }else if(authority.equals("ROLE_AdminUser")){
-            substringUrl+="&username"+userName+"&authority"+"工作室管理员";
-            stringObjectMap.put("url",substringUrl);
-        }
+        stringObjectMap.put("url",substringUrl);
+//        if (authority.equals("ROLE_User")){
+//            substringUrl+="&username="+userName+"&authority="+"用户";
+//            stringObjectMap.put("url",substringUrl);
+////            stringMap.put("userName",userName);
+////            stringMap.put("authority","用户");
+//        }else if (authority.equals("ROLE_IntranetUser")){
+//            substringUrl+="&username="+userName+"&authority="+"工作室内部成员";
+//            stringObjectMap.put("url",substringUrl);
+//        }else if (authority.equals("ROLE_InterViewUser")){
+//            substringUrl+="&username="+userName+"&authority="+"工作室面试官成员";
+//            stringObjectMap.put("url",substringUrl);
+//        }else if(authority.equals("ROLE_AdminUser")){
+//            substringUrl+="&username="+userName+"&authority="+"工作室管理员";
+//            stringObjectMap.put("url",substringUrl);
+//        }
 
 
         logger.info("认证信息:" + JSON.toJSONString(authentication));

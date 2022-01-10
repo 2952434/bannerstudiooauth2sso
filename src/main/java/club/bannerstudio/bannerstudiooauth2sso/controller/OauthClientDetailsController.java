@@ -33,7 +33,7 @@ public class OauthClientDetailsController {
     protected IOauthClientDetailsService iOauthClientDetailsService;
 
 
-    @PostMapping("/oauthClientDetails")
+    @PostMapping("/user/oauthClientDetails")
     @ApiOperation(value = "增加授权信息")
     @ApiImplicitParams({
             @ApiImplicitParam(type = "query", name = "clientId",
@@ -82,7 +82,7 @@ public class OauthClientDetailsController {
         return iOauthClientDetailsService.deleteOauthClientDetails(clientId);
     }
 
-    @PutMapping("/oauthClientDetails")
+    @PutMapping("/admin/oauthClientDetails")
     @ApiOperation(value = "更新授权信息")
     @ApiImplicitParams({
             @ApiImplicitParam(type = "query", name = "clientId",
@@ -123,7 +123,7 @@ public class OauthClientDetailsController {
         return iOauthClientDetailsService.updateOauthClientDetails(oauthClientDetails);
     }
 
-    @GetMapping("/oauthClientDetails/{clientId}")
+    @GetMapping("/admin/oauthClientDetails/{clientId}")
     @ApiOperation(value = "根据客户端id查询客户端信息")
     @ApiImplicitParam(type = "query", name = "clientId",
             value = "客户端id", required = true, dataTypeClass = String.class)
@@ -135,7 +135,7 @@ public class OauthClientDetailsController {
         return iOauthClientDetailsService.selectOauthClientDetailsByClientId(clientId);
     }
 
-    @GetMapping("/oauthClientDetails")
+    @GetMapping("/admin/oauthClientDetails")
     @ApiOperation(value = "分页查询客户端信息")
     @ApiImplicitParams({
             @ApiImplicitParam(type = "query", name = "pageNumber",

@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/login.html", "/css/**", "/js/**", "/img/**","/favicon.ico","/register");
+        web.ignoring().antMatchers("/login.html", "/css/**", "/js/**", "/img/**","/favicon.ico");
 //        web.ignoring().antMatchers("/login.html", "/css/**", "/js/**", "/images/**","/favicon.ico","/register");
 //        放行swagger和knife4j
 //        web.ignoring().antMatchers("/swagger/**")
@@ -66,7 +66,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.requestMatchers()
                 .antMatchers("/login")
-                .antMatchers("/register")
                 .antMatchers("/oauth/authorize")
                 .and()
                 .authorizeRequests().anyRequest().authenticated()
@@ -79,6 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .requestMatchers().antMatchers("/oauth/**","/login/**","/logout/**")
+                .antMatchers("/user/**")
                 .and()
                 .rememberMe()
                 .and()
