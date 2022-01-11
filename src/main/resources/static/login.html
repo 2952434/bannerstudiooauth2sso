@@ -98,7 +98,6 @@
                     </el-form-item>
                     <el-form-item
                             prop="email"
-                            label=""
                             :rules="[
       { required: true, message: '请输入邮箱地址', trigger: 'blur' },
       { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
@@ -253,7 +252,7 @@
                 // 表单的手动校验
                 // this.$refs.dynamicValidateForm.validate(async valid => {
                 //     if (valid) {
-                // axios.defaults.withCredentials = true;
+                // axios.defaults.withCredentials = true;.
                 console.log(this.ruleForm.username)
                 console.log(this.ruleForm.pass)
                 var formData = new FormData();
@@ -306,6 +305,27 @@
                 // }
             },
             getCode1(){
+                if (this.ruleForm1.email === '') {
+                    Message.error("请输入您的邮箱")
+                } else {
+                    const TIME_COUNTs = 60;
+                    if (!this.timers) {
+                        this.counts = TIME_COUNTs;
+                        this.show1 = false;
+                        this.timers = setInterval(() => {
+                            if (this.counts > 0 && this.counts <= TIME_COUNTs) {
+                                this.counts--;
+                            } else {
+                                this.show1 = true;
+                                clearInterval(this.timers);
+                                this.timers = null;
+                            }
+                        }, 1000)
+                    }
+                    if (this.counts !== 30) {
+                        this.disabled = true
+                    }
+                }
                 var formData = new FormData();
                 formData.append("email",this.ruleForm1.email);
                 axios({
@@ -340,6 +360,11 @@
                     }
                 }).then(res=>{
                     console.log(res.data)
+                    this.$message.success(res.data.msg);
+                    this.ruleForm.email = this.ruleForm1.email
+                    this.ruleForm.pass = this.ruleForm1.pass
+                    this.show4 = false
+                    this.show3 = true
                     // console.log(res.data.status)
                 }).catch(err => {
                     console.log(err) // 后台报错返回

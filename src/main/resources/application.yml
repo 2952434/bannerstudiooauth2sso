@@ -37,10 +37,10 @@ spring:
 
   #redis
   redis:
-    host: 127.0.0.1
+    host: 82.157.145.197
     port: 6379
     database: 0
-#    password: asd.123
+    password: asd.123
     jedis:
       pool:
         max-active: 8

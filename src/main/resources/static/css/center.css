@@ -47,6 +47,7 @@ li {
   border: 2px solid #9ea1a5;
 }
 .container .bgc {
+  position: relative;
   height: 100px;
   background-color: #fff3f3;
 }

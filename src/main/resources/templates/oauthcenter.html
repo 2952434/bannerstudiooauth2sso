@@ -23,59 +23,44 @@
         <div class="text">旗帜软件工作室授权中心</div>
     </div>
     <div class="container">
-        <div class="row bgc">
-            <p>应用授权</p>
+        <div class="row bgc" style="position: relative">
+            <div style="display: inline-block"><p style="width: 200px;">应用授权</p></div>
+            <div th:text="'该用户具有'+${authority}+'角色'" style="display: inline-block;position: absolute;right: 5%;top: 40%;"></div>
         </div>
-        <div class="row">
-<!--            <div th:if="${clientId} eq null">-->
-<!--            <div class="content">{{client_id}} 应用请求授权,该应用将获取你以下信息:-->
-<!--                <form action="/oauth/authorize" method="post">-->
-<!--                    <input type="hidden" name="user_oauth_approval" value="true">-->
-<!--                <p class="one">-->
-<!--                    <input type="checkbox" name="scope.{{scope}}" id="all" style="width: 14px;height: 14px" value="true" checked><label for="all">全选</label>-->
-<!--                </p>-->
-<!--                <p>-->
-<!--                    <input type="checkbox"  id="only" style="width: 14px;height: 14px" disabled checked><label for="only">昵称、头像、性别</label>-->
-<!--                </p>-->
-<!--                <div class="row last">-->
-<!--                    <el-button type="primary" class="left" native-type="submit" name="authorize">快速安全登录</el-button>-->
-<!--&lt;!&ndash;                    <button type="submit">快速安全登录</button>&ndash;&gt;-->
-<!--                    <el-button type="info" @click="golast">返回登录页面</el-button>-->
-<!--                </div>-->
-<!--                </form>-->
-<!--                <p class="end">授权后表明你已同意 <a href="javascript:;">旗帜软件工作室服务协议</a></p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div th:if="${clientId} eq null">&ndash;&gt;-->
-                <div class="content">
-                    <div th:text="${clientId}+'请求授权，该应用将获取你的以下信息'"></div>
-                    <div th:text="'该用户具有'+${authority}+'角色'"></div>
+        <div class="row big" style="display: flex">
+                <div class="content-left" style="width: 50%;border-right:1px dashed #b0b0b0;">
+                        <div style="text-align: center;margin-top: 20px;">
+                            <h3>快速安全登录</h3>
+                            <p>请点击头像授权登录</p>
+                        </div>
+                        <div style="width: 80px;height: 80px;margin: 30px 245px;border: 1px solid #ccc;cursor: pointer">
+                        <img src="../img/favicon.ico" alt="" style="width: 100%;height: 100%;">
+                        </div>
+                    <div th:text="'您的用户名为'+${userName}" id="img" style="margin-top:10px;margin-left: 220px;"></div>
+                </div>
+                <div class="content-right" style="width: 50%;">
+                    <div th:text="${clientId}+'请求授权，该应用将获取你的以下信息'" style="text-align: center;margin: 20px auto;font-size: 18px"></div>
 <!--                    <div th:value="${userName}" v-model="userName"></div>-->
-                    <div th:text="'该用户的用户名为'+${userName}+'用户名'" id="img" ></div>
                     <form action="/oauth/authorize" method="post">
                         <input type="hidden" name="user_oauth_approval" value="true">
                         <div th:each="item:${scopes}">
-                        <p class="one">
-                            <input type="checkbox" th:name="'scope.'+${item}" id="all" style="width: 14px;height: 14px" value="true" checked><label for="all">全选</label>
+                        <p class="one" style="text-align: center;margin: 10px auto">
+                            <input type="checkbox" th:name="'scope.'+${item}" id="all" style="width: 14px;height: 14px;" value="true" checked><label for="all" style="cursor: pointer">全选</label>
                         </p>
-                        <p>
-                            <input type="checkbox"  id="only" style="width: 14px;height: 14px" disabled checked><label for="only">昵称、头像、性别</label>
+                        <p style="text-align: center;margin: 10px auto">
+                            <input type="checkbox"  id="only" style="width: 14px;height: 14px;" disabled checked><label for="only" style="cursor: pointer">昵称、头像、性别</label>
                         </p>
                         <div class="row last">
-                            <el-button type="primary" class="left" native-type="submit" name="authorize">快速安全登录</el-button>
-                            <!--                    <button type="submit">快速安全登录</button>-->
-                            <el-button type="info" @click="golast">返回登录页面</el-button>
+                            <el-button type="info" @click="golast" style="margin-left: 250px;">返回登录页面</el-button>
+                        </div>
                         </div>
                     </form>
-                    <p class="end">授权后表明你已同意 <a href="javascript:;">旗帜软件工作室服务协议</a></p>
+                    <p class="end" style="text-align: center;margin: 20px auto">授权后表明你已同意 <a href="javascript:;">旗帜软件工作室服务协议</a></p>
                 </div>
 <!--            </div>-->
-
-
         </div>
-
     </div>
-    <div class="banner">
+    <div class="banner" style="position: relative;margin-top: 100px;">
         <ul>
             <li><a href="javascript:;">工作室官网</a></li>
             <li>|</li>
@@ -83,10 +68,11 @@
             <li>|</li>
             <li><a href="javascript:;">工作室面试</a></li>
             <li>|</li>
-            <li><a href="javascript:;">工作室博客</a></li>
+            <li><a href="javascript:;">工作室OA系统</a></li>
             <li>|</li>
             <li><a href="javascript:;">工作室论坛</a></li>
         </ul>
+        <p style="text-align: center;position: absolute;top: 70%;left: 28%;">版权所有@旗帜软件工作室 | 地址：河南省新乡市华兰大道东段河南科技学院 | 邮编：453000 | 豫ICP备2021016204号</p>
     </div>
 </div>
 <script>
