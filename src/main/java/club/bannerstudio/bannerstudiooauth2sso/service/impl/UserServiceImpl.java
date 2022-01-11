@@ -146,7 +146,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     /**
-     * 根据邮箱查询用户数据
+     * 根据用户名查询用户数据
      * @param userName
      * @return RespBean
      */

@@ -52,6 +52,9 @@
         <el-dialog title="找回密码" :visible.sync="dialogFormVisible2"
                    width="400px" height="60" style="margin-top: -80px" append-to-body>
             <el-form ref="form" :model="form" :rules="rules">
+                <el-form-item>
+                    <el-input v-model="form.userName" placeholder="请输入用户名" ref="adminname"></el-input>
+                </el-form-item>
                 <el-form-item
                         prop="email"
                         label="邮箱"
@@ -202,6 +205,7 @@
                 dialogFormVisible2 : false,
                 //忘记密码
                 form : {
+                    userName : '',
                     email : '',
                     //该code为忘记密码验证码
                     code : '',
@@ -370,8 +374,49 @@
                     console.log(err) // 后台报错返回
                 })
             },
-            findPass(){},
-            getCode(){},
+            findPass(){
+                var formData = new FormData();
+                formData.append("userName",this.form.userName);
+                formData.append("email",this.form.email);
+                formData.append("newPassword",this.form.passs);
+                formData.append("rPassword",this.form.checkPasss);
+                formData.append("code",this.form.code)
+                axios({
+                    method:'POST',
+                    url:'/user/forgetPassword',
+                    data:formData,
+                    headers:{
+                        'Accept':'application/json, text/javascript, */*; q=0.01',
+                        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+                    }
+                }).then(res=>{
+                    console.log(res.data)
+                    this.$message.success(res.data.msg);
+                    // console.log(res.data.status)
+                }).catch(err => {
+                    console.log(err) // 后台报错返回
+                })
+            },
+            getCode(){
+                var formData = new FormData();
+                formData.append("userName",this.form.userName);
+                formData.append("email",this.form.email);
+                axios({
+                    method:'POST',
+                    url:'/user/sendCode',
+                    data:formData,
+                    headers:{
+                        'Accept':'application/json, text/javascript, */*; q=0.01',
+                        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+                    }
+                }).then(res=>{
+                    console.log(res.data)
+                    this.$message.success(res.data.msg);
+                    // console.log(res.data.status)
+                }).catch(err => {
+                    console.log(err) // 后台报错返回
+                })
+            },
         },
         created() {
 
