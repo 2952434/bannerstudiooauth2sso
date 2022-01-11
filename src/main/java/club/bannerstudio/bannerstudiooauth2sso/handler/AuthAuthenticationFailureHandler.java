@@ -28,6 +28,9 @@ public class AuthAuthenticationFailureHandler extends SimpleUrlAuthenticationFai
         //返回json处理 默认也是json处理
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
+        response.setStatus(200);
+        logger.error("错误信息："+exception.toString());
+        logger.error("json的错误信息：+"+JSON.toJSONString(exception));
         response.getWriter().write(JSON.toJSONString(exception));
     }
 }

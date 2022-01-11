@@ -94,13 +94,13 @@ public class AuthorizationController {
         logger.info("session信息："+SPRING_SECURITY_CONTEXT);
         logger.info("model信息:"+model.toString());
         AuthorizationRequest authorizationRequest = (AuthorizationRequest) model.get("authorizationRequest");
-
         modelAndView.setViewName("oauthcenter");
 //        Map<String,Object> stringObjectMap=new HashMap<>();
 //        stringObjectMap.put("clientId",authorizationRequest.getClientId());
 //        stringObjectMap.put("scopes",authorizationRequest.getScope());
         modelAndView.addObject("clientId", authorizationRequest.getClientId());
         modelAndView.addObject("scopes",authorizationRequest.getScope());
+       logger.info("请求地址："+request.getRequestURL());
         return modelAndView;
     }
 //    @RequestMapping("/oauth/getJson")

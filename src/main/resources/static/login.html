@@ -29,7 +29,7 @@
             <div class="inputone">
                 <el-form :model="ruleForm" ref="dynamicValidateForm" label-width="0px" class="demo-dynamic">
                     <el-form-item
-                            prop="email">
+                            prop="username">
                         <el-input v-model="ruleForm.username" placeholder="请输入用户名" ref="adminname"></el-input>
                     </el-form-item>
                     <el-form-item
@@ -252,65 +252,55 @@
                 this.dialogFormVisible2 = !this.dialogFormVisible2
             },
             homepageClick() {
-                // let url=
-                // 表单的手动校验
-                // this.$refs.dynamicValidateForm.validate(async valid => {
-                //     if (valid) {
-                // axios.defaults.withCredentials = true;.
-                console.log(this.ruleForm.username)
-                console.log(this.ruleForm.pass)
-                var formData = new FormData();
-                formData.append("username",this.ruleForm.username);
-                formData.append("password",this.ruleForm.pass);
-                console.log(this.ruleForm.rememberMe)
-                if (this.ruleForm.rememberMe===true){
-                    formData.append("remember-me","on")
+               // this.$refs.dynamicValidateForm.validate(async valid => {
+               //      if (valid){
+                if (this.ruleForm.username===""||this.ruleForm.pass===""){
+                    this.$message({
+                        message: '您输入的字段为空',
+                        type: 'error'
+                    })
+                    return;
                 }
-                axios({
-                    method:'POST',
-                    url:'/login',
-                    data:formData,
-                    headers:{
-                        'Accept':'application/json, text/javascript, */*; q=0.01',
-                        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
-                    }
-                }).then(res=>{
-                    console.log(res.data)
-                    console.log(res.data.status)
-                    if (res.data.status===200){
-                        console.log(res.data.obj)
-                        console.log(res.data.obj.url)
-                       let url= res.data.obj.url
-                        window.location.href=url
-                        // window.location.href="http://localhost:8081/oauth/authorize?client_id=javaboy&response_type=code&scope=all&redirect_uri=http://localhost:8084/callback"
-                        // let ajaxSession=res.data.obj.session
-                        // axios({
-                        //     method:'POST',
-                        //     url:'/oauth/getJson'
-                        // }).then(res=>{
-                        //     console.log(res.data)
-                        // }).catch(err=>{
-                        //         console.log(err.data)
-                        //     }
-                        // )
-                    }
-                }).catch(err => {
-                    console.log(err) // 后台报错返回
-                })
-
-                // if (this.ruleForm.email ==='123@qq.com' && this.ruleForm.pass === '123') {
-                //     this.$message({
-                //         type: 'success',
-                //         message: '登录成功!'
-                //     })
-                //     window.location.href="center.html"
-                // }else {
-                //     this.$message.error('登录失败,您的输入有误')
-                // }
+                        var formData = new FormData();
+                        formData.append("username",this.ruleForm.username);
+                        formData.append("password",this.ruleForm.pass);
+                        console.log(this.ruleForm.rememberMe)
+                        if (this.ruleForm.rememberMe===true){
+                            formData.append("remember-me","on")
+                        }
+                        axios({
+                            method:'POST',
+                            url:'/login',
+                            data:formData,
+                            headers:{
+                                'Accept':'application/json, text/javascript, */*; q=0.01',
+                                'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+                            }
+                        }).then(res=>{
+                            console.log(res)
+                            console.log(res.data)
+                            console.log(res.data.status)
+                            if (res.data.status===200){
+                                console.log(res.data.obj)
+                                console.log(res.data.obj.url)
+                                let url= res.data.obj.url
+                                window.location.href=url
+                                return
+                            }
+                            this.$message({
+                                message: res.data.message,
+                                type: 'error'
+                            })
+                        }).catch(err => {
+                            console.log(err) // 后台报错返回
+                        })
             },
             getCode1(){
                 if (this.ruleForm1.email === '') {
-                    Message.error("请输入您的邮箱")
+                    this.$message({
+                        message: '您输入的字段为空',
+                        type: 'error'
+                    })
                 } else {
                     const TIME_COUNTs = 60;
                     if (!this.timers) {

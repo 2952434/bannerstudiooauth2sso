@@ -34,27 +34,35 @@
                             <p>请点击头像授权登录</p>
                         </div>
                         <div style="width: 80px;height: 80px;margin: 30px 245px;border: 1px solid #ccc;cursor: pointer">
-                        <img src="../img/favicon.ico" alt="" style="width: 100%;height: 100%;">
+                            <form action="/oauth/authorize" method="post" >
+                                <input type="hidden" name="user_oauth_approval" value="true">
+                                <div th:each="item:${scopes}">
+                                    <input type="checkbox" th:name="'scope.'+${item}" id="all" style="width: 14px;height: 14px;" value="true" checked>
+                                    <input name="authorize" type="image" value="ee" src="../img/favicon.ico"  style="width: 100%;height: 100%;">
+                                </div>
+                            </form>
                         </div>
                     <div th:text="'您的用户名为'+${userName}" id="img" style="margin-top:10px;margin-left: 220px;"></div>
-                </div>
+                    </div>
                 <div class="content-right" style="width: 50%;">
                     <div th:text="${clientId}+'请求授权，该应用将获取你的以下信息'" style="text-align: center;margin: 20px auto;font-size: 18px"></div>
 <!--                    <div th:value="${userName}" v-model="userName"></div>-->
-                    <form action="/oauth/authorize" method="post">
-                        <input type="hidden" name="user_oauth_approval" value="true">
-                        <div th:each="item:${scopes}">
-                        <p class="one" style="text-align: center;margin: 10px auto">
-                            <input type="checkbox" th:name="'scope.'+${item}" id="all" style="width: 14px;height: 14px;" value="true" checked><label for="all" style="cursor: pointer">全选</label>
-                        </p>
+
+                    <p class="one" style="text-align: center;margin: 10px auto">
+                      <label for="all" style="cursor: pointer">全选</label>
+                    </p>
+<!--                        <div th:each="item:${scopes}">-->
+<!--                        <p class="one" style="text-align: center;margin: 10px auto">-->
+<!--                            <input type="checkbox" th:name="'scope.'+${item}" id="all" style="width: 14px;height: 14px;" value="true" checked><label for="all" style="cursor: pointer">全选</label>-->
+<!--                        </p>-->
                         <p style="text-align: center;margin: 10px auto">
                             <input type="checkbox"  id="only" style="width: 14px;height: 14px;" disabled checked><label for="only" style="cursor: pointer">昵称、头像、性别</label>
                         </p>
-                        <div class="row last">
-                            <el-button type="info" @click="golast" style="margin-left: 250px;">返回登录页面</el-button>
+<!--                        <div class="row last">-->
+<!--                            <el-button type="info" @click="golast" style="margin-left: 250px;">取消</el-button>-->
+<!--                        </div>-->
                         </div>
-                        </div>
-                    </form>
+
                     <p class="end" style="text-align: center;margin: 20px auto">授权后表明你已同意 <a href="javascript:;">旗帜软件工作室服务协议</a></p>
                 </div>
 <!--            </div>-->
@@ -62,15 +70,15 @@
     </div>
     <div class="banner" style="position: relative;margin-top: 100px;">
         <ul>
-            <li><a href="javascript:;">工作室官网</a></li>
+            <li><a href="https://www.bannerstudio.club/">工作室官网</a></li>
             <li>|</li>
             <li><a href="javascript:;">意见反馈</a></li>
             <li>|</li>
-            <li><a href="javascript:;">工作室面试</a></li>
+            <li><a href="https://interview.bannerstudio.club/;">工作室面试</a></li>
             <li>|</li>
-            <li><a href="javascript:;">工作室OA系统</a></li>
+            <li><a href="https://oa.bannerstudio.club/">工作室OA系统</a></li>
             <li>|</li>
-            <li><a href="javascript:;">工作室论坛</a></li>
+            <li><a href="https://forum.bannerstudio.club/;">工作室论坛</a></li>
         </ul>
         <p style="text-align: center;position: absolute;top: 70%;left: 28%;">版权所有@旗帜软件工作室 | 地址：河南省新乡市华兰大道东段河南科技学院 | 邮编：453000 | 豫ICP备2021016204号</p>
     </div>
@@ -84,18 +92,22 @@
                 scope: "",
                 userName: "",
                 authority: "",
+                requestUrl:"",
+                redirectUrl:""
             }
         },
         methods: {
             golast() {
-                window.location.href = '../login.html'
+                window.location.href = this.requestUrl
             },
         },
         mounted() {
 
         },
         created() {
-           alert(document.getElementById("img").innerText)
+           document.getElementById("img").innerText
+            // alert(document.location.toString())
+          this.requestUrl=document.location.toString()
             // var two=[[${userName}]]
             // // this.userName=two
             // alert(two)
@@ -112,33 +124,33 @@
             //     return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(url) || [, ""])[1].replace(/\+/g, '%20')) || null
             // }
 
-            //     function GetUrlParam(paraName) {
-            //         var url = document.location.toString();
-            //         var arrObj = url.split("?");
-            //
-            //         if (arrObj.length > 1) {
-            //             var arrPara = arrObj[1].split("&");
-            //             var arr;
-            //
-            //             for (var i = 0; i < arrPara.length; i++) {
-            //                 arr = arrPara[i].split("=");
-            //
-            //                 if (arr != null && arr[0] == paraName) {
-            //                     return arr[1];
-            //                 }
-            //             }
-            //             return "";
-            //         }
-            //         else {
-            //             return "";
-            //         }
-            //     }
-            //      this.client_id=GetUrlParam("client_id")
-            //     this.scope=GetUrlParam("scope")
-            //     this.userName=GetUrlParam("username")
-            //     this.authority=GetUrlParam("authority")
-            //
-            // }
+                // function GetUrlParam(paraName) {
+                //     var url = document.location.toString();
+                //     var arrObj = url.split("?");
+                //
+                //     if (arrObj.length > 1) {
+                //         var arrPara = arrObj[1].split("&");
+                //         var arr;
+                //
+                //         for (var i = 0; i < arrPara.length; i++) {
+                //             arr = arrPara[i].split("=");
+                //
+                //             if (arr != null && arr[0] == paraName) {
+                //                 return arr[1];
+                //             }
+                //         }
+                //         return "";
+                //     }
+                //     else {
+                //         return "";
+                //     }
+                // }
+                //  this.client_id=GetUrlParam("client_id")
+                // this.scope=GetUrlParam("scope")
+                // this.userName=GetUrlParam("username")
+                // this.authority=GetUrlParam("authority")
+
+
         }
     })
 </script>

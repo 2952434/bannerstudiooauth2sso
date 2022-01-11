@@ -87,7 +87,6 @@ public class AuthAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
             logger.info("this is :" + httpSession.toString() + "--> ");
             logger.info(name + " : " + value);
         }
-        UrlPattern urlPattern=new UrlPattern();
 
 //        String client_id=urlPattern.getParamByUrl(url,"client_id");
 //        String scope=urlPattern.getParamByUrl(url,"scope");
