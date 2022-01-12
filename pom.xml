@@ -5,6 +5,7 @@
     <groupId>club.bannerstudio</groupId>
     <artifactId>bannerstudiooauth2sso</artifactId>
     <version>v1.0</version>
+    <packaging>jar</packaging>
     <name>bannerstudiooauth2sso</name>
     <description>BannerStudioOauth2SSO</description>
 
