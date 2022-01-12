@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>club.bannerstudio</groupId>
     <artifactId>bannerstudiooauth2sso</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>v1.0</version>
     <name>bannerstudiooauth2sso</name>
-    <description>bannerstudiooauth2sso</description>
+    <description>BannerStudioOauth2SSO</description>
 
     <properties>
         <java.version>1.8</java.version>

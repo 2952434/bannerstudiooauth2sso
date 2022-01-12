@@ -434,8 +434,13 @@
                         'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
                     }
                 }).then(res=>{
-                    console.log(res.data)
-                    // console.log(res.data.status)
+                    if (res.data.status===200){
+                        this.$message.success(res.data.msg);
+                        return
+                    }else {
+                        this.$message.error(res.data.msg);
+                        return
+                    }
                 }).catch(err => {
                     console.log(err) // 后台报错返回
                 })
@@ -459,13 +464,17 @@
                                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                                 }
                             }).then(res => {
-                                console.log(res.data)
-                                this.$message.success(res.data.msg);
-                                this.ruleForm.email = this.ruleForm1.email
-                                this.ruleForm.pass = this.ruleForm1.pass
-                                this.show4 = false
-                                this.show3 = true
-                                // console.log(res.data.status)
+                                if (res.data.status===200){
+                                    this.$message.success(res.data.msg);
+                                    this.ruleForm.email = this.ruleForm1.email
+                                    this.ruleForm.pass = this.ruleForm1.pass
+                                    this.show4 = false
+                                    this.show3 = true
+                                    return
+                                }else {
+                                    this.$message.error(res.data.msg);
+                                    return
+                                }
                             }).catch(err => {
                                 console.log(err) // 后台报错返回
                             })
@@ -478,29 +487,52 @@
                 })
             },
             findPass() {
-                var formData = new FormData();
-                formData.append("userName", this.form.userName);
-                formData.append("email", this.form.email);
-                formData.append("newPassword", this.form.passs);
-                formData.append("rPassword", this.form.checkPasss);
-                formData.append("code", this.form.code)
-                axios({
-                    method: 'POST',
-                    url: '/user/forgetPassword',
-                    data: formData,
-                    headers: {
-                        'Accept': 'application/json, text/javascript, */*; q=0.01',
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                this.$refs.form.validate(valid => {
+                    if (valid) {
+                        try {
+                            var formData = new FormData();
+                            formData.append("userName", this.form.userName);
+                            formData.append("email", this.form.email);
+                            formData.append("newPassword", this.form.passs);
+                            formData.append("rPassword", this.form.checkPasss);
+                            formData.append("code", this.form.code)
+                            axios({
+                                method: 'POST',
+                                url: '/user/forgetPassword',
+                                data: formData,
+                                headers: {
+                                    'Accept': 'application/json, text/javascript, */*; q=0.01',
+                                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                                }
+                            }).then(res => {
+                                console.log(res.data)
+                                alert(res.data.status)
+                               if (res.data.status===200){
+                                   this.$message.success(res.data.msg);
+                                   return
+                               }else {
+                                   this.$message.error(res.data.msg);
+                                   return
+                               }
+                                // console.log(res.data.status)
+                            }).catch(err => {
+                                console.log(err) // 后台报错返回
+                            })
+                        } catch (error) {
+                            console.log(error)
+                        } finally {
+                            console.log("end")
+                        }
                     }
-                }).then(res => {
-                    console.log(res.data)
-                    this.$message.success(res.data.msg);
-                    // console.log(res.data.status)
-                }).catch(err => {
-                    console.log(err) // 后台报错返回
-                })
-            },
+                })},
             getCode() {
+                if (this.form.userName === ''||this.form.email==='') {
+                    this.$message({
+                        message: '您输入的用户名或邮箱为空,请输入邮箱',
+                        type: 'error'
+                    })
+                    return
+                }
                 var formData = new FormData();
                 formData.append("userName", this.form.userName);
                 formData.append("email", this.form.email);
@@ -513,9 +545,13 @@
                         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                     }
                 }).then(res => {
-                    console.log(res.data)
-                    this.$message.success(res.data.msg);
-                    // console.log(res.data.status)
+                    if (res.data.status===200){
+                        this.$message.success(res.data.msg);
+                        return
+                    }else {
+                        this.$message.error(res.data.msg);
+                        return
+                    }
                 }).catch(err => {
                     console.log(err) // 后台报错返回
                 })
