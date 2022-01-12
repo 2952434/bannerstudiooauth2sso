@@ -67,7 +67,7 @@ public class AuthAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
             Map<String, String> stringMap = new HashMap<>();
             stringObjectMap.put("message", "您传入的登录地址有误，请返回正确的登录地址");
             stringObjectMap.put("userMap", stringMap);
-            stringObjectMap.put("url", "/");
+            stringObjectMap.put("url", "/login.html");
             response.getWriter().write(JSON.toJSONString(RespBean.ok(stringObjectMap)));
         }
         }

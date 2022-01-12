@@ -82,7 +82,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .rememberMe()
                 .and()
                 .csrf().disable()
-                .exceptionHandling().accessDeniedHandler(new AuthAccessDeniedHandler());
+                .exceptionHandling().accessDeniedHandler(new AuthAccessDeniedHandler())
+                .and().cors();
 //                .authenticationEntryPoint(new AuthAuthenticationEntryPoint());
     }
 }
