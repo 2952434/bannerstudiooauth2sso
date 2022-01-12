@@ -36,7 +36,7 @@
                             <el-input v-model="ruleForm.username" placeholder="请输入用户名" ref="adminname"></el-input>
                         </el-form-item>
                         <el-form-item
-                                prop="password">
+                                prop="pass">
                             <el-input placeholder="请输入密码" v-model="ruleForm.pass" show-password
                                       ref="adminword"></el-input>
                         </el-form-item>
@@ -53,12 +53,12 @@
                 </div>
             </div>
         </div>
-        <!--    :close-on-click-modal="false"-->
+<!--        找回密码-->
         <div>
-            <el-dialog title="找回密码" :visible.sync="dialogFormVisible2"
-                       width="400px" height="60" style="margin-top: -80px" append-to-body>
+            <el-dialog title="找回密码" :visible.sync="dialogFormVisible2" :destroy-on-close="true" :show-close="false"
+                       width="400px" height="60" style="margin-top: -100px" append-to-body>
                 <el-form ref="form" :model="form" :rules="rules">
-                    <el-form-item prop="username">
+                    <el-form-item prop="userName">
                         <el-input v-model="form.userName" placeholder="请输入用户名" ref="adminname"></el-input>
                     </el-form-item>
                     <el-form-item
@@ -67,13 +67,12 @@
                     >
                         <el-input v-model="form.email" placeholder="请输入邮箱"></el-input>
                     </el-form-item>
-                    <el-form-item label="验证码" prop="code1">
+                    <el-form-item label="验证码" prop="code">
                         <el-input v-model="form.code" autocomplete="off" placeholder="请输入验证码"></el-input>
                         <el-button v-show="show" @click="getCode" style="width: 112px">获取验证码</el-button>
                         <el-button v-show="!show" class="count" :disabled="disabled" style="width:112px;margin-left: 0">
                             {{count}} s
                         </el-button>
-                        <!--          </div>-->
                     </el-form-item>
                     <el-form-item label="新密码" prop="passs">
                         <el-input type="password" v-model="form.passs" autocomplete="off" placeholder="请输入新密码"></el-input>
@@ -83,7 +82,7 @@
                     </el-form-item>
                 </el-form>
                 <div slot="footer" class="dialog-footer">
-                    <el-button @click="dialogFormVisible2 = false">取 消</el-button>
+                    <el-button @click="close">取 消</el-button>
                     <el-button type="primary" @click="findPass">确定</el-button>
                 </div>
             </el-dialog>
@@ -213,7 +212,7 @@
                                 message: '用户名需要4到16位（字母，数字，下划线，减号）',
                                 trigger: ['blur', 'change']
                             }],
-                        password: [
+                        pass: [
                             {required: true, message: '请输入密码', trigger: 'blur'},
                             {
                                 pattern: /^[a-zA-Z]\w{5,17}$/,
@@ -240,71 +239,39 @@
                     passs: '',
                     checkPasss: ''
                 },
-                //登录的密码确定规则
-                rules: {
-                    username: [{required: true, message: '请输入用户名', trigger: 'blur'},
-                        {
-                            pattern: /^[a-zA-Z0-9_-]{4,16}$/,
-                            message: '用户名需要4到16位（字母，数字，下划线，减号）',
-                            trigger: ['blur', 'change']
-                        }],
-                    email: [
-                        {required: true, message: '请输入邮箱地址', trigger: 'blur'},
-                        {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
-                    ],
-                    passs: [{required: true, message: '请输入密码', trigger: 'blur'},
-                        {
-                            pattern: /^[a-zA-Z]\w{5,17}$/,
-                            message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
-                            trigger: ['blur', 'change'],
-                            validator: validatePass
-                        }
-                    ],
-                    checkPasss: [{required: true, message: '请输入密码', trigger: 'blur'},
-                        {
-                            pattern: /^[a-zA-Z]\w{5,17}$/,
-                            message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
-                            trigger: ['blur', 'change'],
-                            validator: validatePass2
-                        }
-                    ],
-                    code1: [{required: true, message: '请输入验证码', trigger: 'blur'},
-                        {pattern:/^\d{5}$/, message: '请输入5位验证码', trigger: 'blur'}
-                    ]
-
-
-
-
-
-
-                    //
-                    // username: [{required: true, message: '请输入用户名', trigger: 'blur'},
-                    //     {
-                    //         pattern: /^[a-zA-Z0-9_-]{4,16}$/,
-                    //         message: '用户名需要4到16位（字母，数字，下划线，减号）',
-                    //         trigger: ['blur', 'change']
-                    //     }],
-                    // email: [
-                    //     {required: true, message: '请输入邮箱地址', trigger: 'blur'},
-                    //     {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
-                    // ],
-                    // passs: [{required: true, message: '请输入密码', trigger: 'blur'},
-                    //     {
-                    //         pattern: /^[a-zA-Z]\w{5,17}$/,
-                    //         message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
-                    //         trigger: ['blur', 'change'],
-                    //         validator: validatePass
-                    //     }
-                    // ],
-                    // checkPasss: [
-                    //     {required: true, message: '请输入密码', trigger: 'blur'},
-                    //     {
-                    //         pattern: /^[a-zA-Z]\w{5,17}$/,
-                    //         message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
-                    //         trigger: ['blur', 'change'],
-                    //         validator: validatePass2
-                    //     }
-                    // ],
+                 //忘记密码
+                   rules : {
+                       userName: [{required: true, message: '请输入用户名', trigger: 'blur'},
+                           {
+                               pattern: /^[a-zA-Z0-9_-]{4,16}$/,
+                               message: '用户名需要4到16位（字母，数字，下划线，减号）',
+                               trigger: ['blur', 'change']
+                           }],
+                       email: [
+                           {required: true, message: '请输入邮箱地址', trigger: 'blur'},
+                           {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
+                       ],
+                       code: [
+                           {required: true, message: '请输入验证码', trigger: 'blur'},
+                           {pattern:/^\d{5}$/, message: '请输入5位验证码', trigger: 'blur'}
+                       ],
+                       passs: [{required: true, message: '请输入密码', trigger: 'blur'},
+                           {
+                               pattern: /^[a-zA-Z]\w{5,17}$/,
+                               message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
+                               trigger: ['blur', 'change'],
+                               validator: validatePass
+                           }
+                       ],
+                       checkPasss: [
+                           {required: true, message: '请输入密码', trigger: 'blur'},
+                           {
+                               pattern: /^[a-zA-Z]\w{5,17}$/,
+                               message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
+                               trigger: ['blur', 'change'],
+                               validator: validatePass2
+                           }
+                       ],
                 },
                 //注册的密码确定规则
                 ruless: {
@@ -352,19 +319,29 @@
         },
         methods: {
             register1() {
-                this.show3 = false
-                this.show4 = true
+                    this.show3 = false
+                    this.show4 = true
+                    this.ruleForm1.username= ''
+                    this.ruleForm1.email= ''
+                    this.ruleForm1.phone= ''
+                    this.ruleForm1.pass= ''
+                    this.ruleForm1.checkPass= ''
+                    this.ruleForm1.code1=''
             },
             login3() {
                 this.show4 = false
                 this.show3 = true
             },
             forget() {
+                this.form.userName = ''
                 this.form.email = ''
                 this.form.code = ''
                 this.form.passs = ''
                 this.form.checkPasss = ''
                 this.dialogFormVisible2 = !this.dialogFormVisible2
+            },
+            close() {
+                this.dialogFormVisible2 = false
             },
             homepageClick() {
                 this.$refs.loginForm.validate(valid => {
