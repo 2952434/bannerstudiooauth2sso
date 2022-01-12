@@ -74,8 +74,8 @@ public class UserServiceImpl implements IUserService {
                 return RespBean.error("验证码错误");
             }
             if (userMapper.insert(user) == 1){
-                logger.info("插入成功");
-                return RespBean.ok("插入成功");
+                logger.info("注册成功");
+                return RespBean.ok("注册成功");
             }
             logger.error("系统异常，插入失败");
             return  RespBean.error("系统异常，插入失败");

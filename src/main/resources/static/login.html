@@ -5,7 +5,7 @@
     <title>旗帜软件工作室统一授权中心</title>
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="./css/login.css">
-    <link rel="shortcut icon" href="./img/favicon.ico" />
+    <link rel="shortcut icon" href="./img/favicon.ico"/>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <!-- 引入样式 -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
@@ -16,126 +16,136 @@
 <body>
 <div id="app">
     <div class="whole">
-    <!--    登录-->
-    <div class="login" v-show="show3">
-        <div class="content">
-            <div class="header">
-                <h1>旗帜软件工作室统一授权中心</h1>
-                <h2>欢迎登录</h2>
-            </div>
-            <div class="register">
-                没有账号？<el-button type="text" @click="register1">点击注册</el-button>
-            </div>
-            <div class="inputone">
-                <el-form :model="ruleForm" ref="dynamicValidateForm" label-width="0px" class="demo-dynamic">
-                    <el-form-item
-                            prop="username">
-                        <el-input v-model="ruleForm.username" placeholder="请输入用户名" ref="adminname"></el-input>
-                    </el-form-item>
-                    <el-form-item
-                            prop="pass">
-                        <el-input placeholder="请输入密码" v-model="ruleForm.pass" show-password ref="adminword"></el-input>
-                    </el-form-item>
-                <div class="forget">
-                    <el-button type="text" @click="forget">忘记密码?</el-button>
+        <!--    登录-->
+        <div class="login" v-show="show3">
+            <div class="content">
+                <div class="header">
+                    <h1>旗帜软件工作室统一授权中心</h1>
+                    <h2>欢迎登录</h2>
                 </div>
-                    <div class="remember">
-                        <input type="checkbox" name="remember" id="me" style="width: 14px;height: 14px" v-model="ruleForm.rememberMe"><label for="me">记住我</label>
-                    </div>
-                <el-button type="primary" @click="homepageClick" class="denglu">登录</el-button>
-                </el-form>
+                <div class="register">
+                    没有账号？
+                    <el-button type="text" @click="register1">点击注册</el-button>
+                </div>
+                <div class="inputone">
+                    <el-form :rules="rulesfirst" :model="ruleForm" ref="loginForm" label-width="0px"
+                             class="demo-dynamic">
+                        <el-form-item
+                                prop="username"
+                        >
+                            <el-input v-model="ruleForm.username" placeholder="请输入用户名" ref="adminname"></el-input>
+                        </el-form-item>
+                        <el-form-item
+                                prop="password">
+                            <el-input placeholder="请输入密码" v-model="ruleForm.pass" show-password
+                                      ref="adminword"></el-input>
+                        </el-form-item>
+                        <div class="forget">
+                            <el-button type="text" @click="forget">忘记密码?</el-button>
+                        </div>
+                        <div class="remember">
+                            <input type="checkbox" name="remember" id="me" style="width: 14px;height: 14px"
+                                   v-model="ruleForm.rememberMe"><label for="me">记住我</label>
+                        </div>
+                        <el-button type="primary" :loading="loading" @click="homepageClick" class="denglu">登录
+                        </el-button>
+                    </el-form>
+                </div>
             </div>
         </div>
-    </div>
-    <!--    :close-on-click-modal="false"-->
-    <div>
-        <el-dialog title="找回密码" :visible.sync="dialogFormVisible2"
-                   width="400px" height="60" style="margin-top: -80px" append-to-body>
-            <el-form ref="form" :model="form" :rules="rules">
-                <el-form-item>
-                    <el-input v-model="form.userName" placeholder="请输入用户名" ref="adminname"></el-input>
-                </el-form-item>
-                <el-form-item
-                        prop="email"
-                        label="邮箱"
-                        :rules="[
-      { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-      { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
-    ]"
-                >
-                    <el-input v-model="form.email"></el-input>
-                </el-form-item>
-                <el-form-item label="验证码" >
-                    <!--          <div>-->
-                    <el-input v-model="form.code" autocomplete="off"></el-input>
-                    <el-button v-show="show" @click="getCode" style="width: 112px">获取验证码</el-button>
-                    <el-button v-show="!show" class="count" :disabled="disabled" style="width:112px;margin-left: 0">{{count}} s</el-button>
-                    <!--          </div>-->
-                </el-form-item>
-                <el-form-item label="新密码" prop="passs">
-                    <el-input type="password" v-model="form.passs" autocomplete="off"></el-input>
-                </el-form-item>
-                <el-form-item label="确认新密码" prop="checkPasss">
-                    <el-input type="password" v-model="form.checkPasss" autocomplete="off"></el-input>
-                </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogFormVisible2 = false">取 消</el-button>
-                <el-button type="primary" @click="findPass">确定</el-button>
-            </div>
-        </el-dialog>
-    </div>
-    <!--    注册页面-->
-    <div class="login11" v-show="show4">
-        <div class="content1">
-            <div class="header1">
-                <h2>欢迎注册</h2>
-            </div>
-            <div class="register11">
-                已有账号？<el-button type="text" @click="login3">点击登录</el-button>
-            </div>
-            <div class="inputone1">
-                <el-form :model="ruleForm1" ref="dynamicValidateForm" label-width="0px" class="demo-dynamic">
-                    <el-form-item>
-                        <el-input v-model="ruleForm1.username" placeholder="请输入用户名" ref="adminname"></el-input>
+        <!--    :close-on-click-modal="false"-->
+        <div>
+            <el-dialog title="找回密码" :visible.sync="dialogFormVisible2"
+                       width="400px" height="60" style="margin-top: -80px" append-to-body>
+                <el-form ref="form" :model="form" :rules="rules">
+                    <el-form-item prop="username">
+                        <el-input v-model="form.userName" placeholder="请输入用户名" ref="adminname"></el-input>
                     </el-form-item>
                     <el-form-item
                             prop="email"
-                            :rules="[
-      { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-      { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
-    ]"
+                            label="邮箱"
                     >
-                        <el-input v-model="ruleForm1.email" autocomplete="off" placeholder="请输入邮箱"></el-input>
+                        <el-input v-model="form.email" placeholder="请输入邮箱"></el-input>
                     </el-form-item>
-                    <el-form-item>
-                        <el-input v-model="ruleForm1.phone" autocomplete="off" placeholder="请输入手机号"></el-input>
+                    <el-form-item label="验证码" prop="code1">
+                        <el-input v-model="form.code" autocomplete="off" placeholder="请输入验证码"></el-input>
+                        <el-button v-show="show" @click="getCode" style="width: 112px">获取验证码</el-button>
+                        <el-button v-show="!show" class="count" :disabled="disabled" style="width:112px;margin-left: 0">
+                            {{count}} s
+                        </el-button>
+                        <!--          </div>-->
                     </el-form-item>
-                    <el-form-item label="" prop="pass">
-                        <el-input type="password" v-model="ruleForm1.pass" autocomplete="off" placeholder="请输入密码"></el-input>
+                    <el-form-item label="新密码" prop="passs">
+                        <el-input type="password" v-model="form.passs" autocomplete="off" placeholder="请输入新密码"></el-input>
                     </el-form-item>
-                    <el-form-item label="" prop="checkPass">
-                        <el-input type="password" v-model="ruleForm1.checkPass" autocomplete="off" placeholder="请再次确认密码"></el-input>
-                    </el-form-item>
-                    <el-form-item class="end">
-                        <input type="text" v-model="ruleForm1.code1" placeholder="请输入验证码" class="yanone1" style="outline: #b0b0b0 none;">
-                        <el-button class="yantwo1" style="outline:none;text-align: center" v-show="show1" @click="getCode1">获取验证码</el-button>
-                        <el-button class="yantwo1 count kuang" style="outline:none" disabled v-show="!show1">{{counts}}s</el-button>
-                    </el-form-item>
-                    <el-form-item class="end">
-                        <el-button type="primary" @click="login3Click" class="zhuceOne1">注册</el-button>
+                    <el-form-item label="确认新密码" prop="checkPasss">
+                        <el-input type="password" v-model="form.checkPasss" autocomplete="off" placeholder="请再次确认密码"></el-input>
                     </el-form-item>
                 </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible2 = false">取 消</el-button>
+                    <el-button type="primary" @click="findPass">确定</el-button>
+                </div>
+            </el-dialog>
+        </div>
+        <!--    注册页面-->
+        <div class="login11" v-show="show4">
+            <div class="content1">
+                <div class="header1">
+                    <h2>欢迎注册</h2>
+                </div>
+                <div class="register11">
+                    已有账号？
+                    <el-button type="text" @click="login3">点击登录</el-button>
+                </div>
+                <div class="inputone1">
+                    <el-form :rules="ruless" :model="ruleForm1" ref="registerForm" label-width="0px"
+                             class="demo-dynamic">
+                        <el-form-item prop="username">
+                            <el-input v-model="ruleForm1.username" placeholder="请输入用户名" ref="adminname"></el-input>
+                        </el-form-item>
+                        <el-form-item
+                                prop="email"
+                        >
+                            <el-input v-model="ruleForm1.email" autocomplete="off" placeholder="请输入邮箱"></el-input>
+                        </el-form-item>
+                        <el-form-item prop="phone">
+                            <el-input v-model="ruleForm1.phone" autocomplete="off" placeholder="请输入手机号"></el-input>
+                        </el-form-item>
+                        <el-form-item label="" prop="pass">
+                            <el-input type="password" v-model="ruleForm1.pass" autocomplete="off"
+                                      placeholder="请输入密码"></el-input>
+                        </el-form-item>
+                        <el-form-item label="" prop="checkPass">
+                            <el-input type="password" v-model="ruleForm1.checkPass" autocomplete="off"
+                                      placeholder="请再次确认密码"></el-input>
+                        </el-form-item>
+                        <el-form-item class="end" prop="code1">
+                            <el-input type="text" v-model="ruleForm1.code1" placeholder="请输入验证码" class="yanone1"
+                                   style="outline: #b0b0b0 none;"></el-input>
+                        </el-form-item>
+                        <el-form-item class="end" >
+                            <el-button class="yantwo1" style="outline:none;text-align: center" v-show="show1"
+                                       @click="getCode1">获取验证码
+                            </el-button>
+                            <el-button class="yantwo1 count kuang" style="outline:none" disabled v-show="!show1">
+                                {{counts}}s
+                            </el-button>
+                        </el-form-item>
+                        <el-form-item class="end">
+                            <el-button type="primary" @click="login3Click" class="zhuceOne1">注册</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <script>
     new Vue({
-        el:'#app',
-        data : function () {
+        el: '#app',
+        data: function () {
             //登录时忘记密码的密码验证
             var validatePass = (rule, value, callback) => {
                 if (value === '') {
@@ -162,7 +172,7 @@
                     callback(new Error('请输入密码'));
                 } else {
                     if (this.ruleForm1.checkPass !== '') {
-                        this.$refs.ruleForm1.validateField('checkPass');
+                        this.$refs.registerForm.validateField('checkPass');
                     }
                     callback();
                 }
@@ -178,64 +188,169 @@
             };
             return {
                 disabled: true,
-                show3 : true,
-                show4 : false,
+                show3: true,
+                show4: false,
                 //登录
                 ruleForm: {
-                    username:'',
-                    pass:'',
+                    username: '',
+                    pass: '',
                     rememberMe: false
                 },
                 //注册
-                ruleForm1 : {
-                    username:'',
-                    email : '',
-                    phone : '',
+                ruleForm1: {
+                    username: '',
+                    email: '',
+                    phone: '',
                     pass: '',
                     checkPass: '',
-                    code1 :'',
+                    code1: '',
                 },
+                rulesfirst:
+                    {
+                        username: [{required: true, message: '请输入用户名', trigger: 'blur'},
+                            {
+                                pattern: /^[a-zA-Z0-9_-]{4,16}$/,
+                                message: '用户名需要4到16位（字母，数字，下划线，减号）',
+                                trigger: ['blur', 'change']
+                            }],
+                        password: [
+                            {required: true, message: '请输入密码', trigger: 'blur'},
+                            {
+                                pattern: /^[a-zA-Z]\w{5,17}$/,
+                                message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
+                                trigger: ['blur', 'change']
+                            }
+                        ]
+                    },
+                loading: false,
                 //code1为注册验证码
                 show: true,
                 count: '',
                 timer: null,
-                counts:'',
-                show1:true,
+                counts: '',
+                show1: true,
                 timers: null,
-                dialogFormVisible2 : false,
+                dialogFormVisible2: false,
                 //忘记密码
-                form : {
-                    userName : '',
-                    email : '',
+                form: {
+                    userName: '',
+                    email: '',
                     //该code为忘记密码验证码
-                    code : '',
-                    passs:'',
-                    checkPasss:''
+                    code: '',
+                    passs: '',
+                    checkPasss: ''
                 },
                 //登录的密码确定规则
                 rules: {
-                    passs: [
-                        {validator: validatePass, trigger: 'blur'}
+                    username: [{required: true, message: '请输入用户名', trigger: 'blur'},
+                        {
+                            pattern: /^[a-zA-Z0-9_-]{4,16}$/,
+                            message: '用户名需要4到16位（字母，数字，下划线，减号）',
+                            trigger: ['blur', 'change']
+                        }],
+                    email: [
+                        {required: true, message: '请输入邮箱地址', trigger: 'blur'},
+                        {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
                     ],
-                    checkPasss: [
-                        {validator: validatePass2, trigger: 'blur'}
+                    passs: [{required: true, message: '请输入密码', trigger: 'blur'},
+                        {
+                            pattern: /^[a-zA-Z]\w{5,17}$/,
+                            message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
+                            trigger: ['blur', 'change'],
+                            validator: validatePass
+                        }
                     ],
+                    checkPasss: [{required: true, message: '请输入密码', trigger: 'blur'},
+                        {
+                            pattern: /^[a-zA-Z]\w{5,17}$/,
+                            message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
+                            trigger: ['blur', 'change'],
+                            validator: validatePass2
+                        }
+                    ],
+                    code1: [{required: true, message: '请输入验证码', trigger: 'blur'},
+                        {pattern:/^\d{5}$/, message: '请输入5位验证码', trigger: 'blur'}
+                    ]
+
+
+
+
+
+
+                    //
+                    // username: [{required: true, message: '请输入用户名', trigger: 'blur'},
+                    //     {
+                    //         pattern: /^[a-zA-Z0-9_-]{4,16}$/,
+                    //         message: '用户名需要4到16位（字母，数字，下划线，减号）',
+                    //         trigger: ['blur', 'change']
+                    //     }],
+                    // email: [
+                    //     {required: true, message: '请输入邮箱地址', trigger: 'blur'},
+                    //     {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
+                    // ],
+                    // passs: [{required: true, message: '请输入密码', trigger: 'blur'},
+                    //     {
+                    //         pattern: /^[a-zA-Z]\w{5,17}$/,
+                    //         message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
+                    //         trigger: ['blur', 'change'],
+                    //         validator: validatePass
+                    //     }
+                    // ],
+                    // checkPasss: [
+                    //     {required: true, message: '请输入密码', trigger: 'blur'},
+                    //     {
+                    //         pattern: /^[a-zA-Z]\w{5,17}$/,
+                    //         message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
+                    //         trigger: ['blur', 'change'],
+                    //         validator: validatePass2
+                    //     }
+                    // ],
                 },
                 //注册的密码确定规则
                 ruless: {
-                    pass: [
-                        { validator: validatePass1, trigger: 'blur' }
+                    username: [{required: true, message: '请输入用户名', trigger: 'blur'},
+                        {
+                            pattern: /^[a-zA-Z0-9_-]{4,16}$/,
+                            message: '用户名需要4到16位（字母，数字，下划线，减号）',
+                            trigger: ['blur', 'change']
+                        }],
+                    email: [
+                        {required: true, message: '请输入邮箱地址', trigger: 'blur'},
+                        {type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change']}
                     ],
-                    checkPass: [
-                        { validator: validatePass21, trigger: 'blur' }
+                    pass: [{required: true, message: '请输入密码', trigger: 'blur'},
+                        {
+                            pattern: /^[a-zA-Z]\w{5,17}$/,
+                            message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
+                            trigger: ['blur', 'change'],
+                            validator: validatePass1
+                        }
                     ],
+                    checkPass: [{required: true, message: '请输入密码', trigger: 'blur'},
+                        {
+                            pattern: /^[a-zA-Z]\w{5,17}$/,
+                            message: '密码不符合要求(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)',
+                            trigger: ['blur', 'change'],
+                            validator: validatePass21
+                        }
+                    ],
+                    phone: [{required: true, message: '请输入手机号', trigger: 'blur'},
+                        {
+                            pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/,
+                            message: '请输入正确的手机号',
+                            trigger: ['blur', 'change']
+                        }
+                    ],
+                    code1: [{required: true, message: '请输入验证码', trigger: 'blur'},
+                        {pattern:/^\d{5}$/, message: '请输入5位验证码', trigger: 'blur'}
+                    ]
                 }
             }
         },
         mounted() {
 
         },
-        methods:{
+        methods: {
             register1() {
                 this.show3 = false
                 this.show4 = true
@@ -245,62 +360,73 @@
                 this.show3 = true
             },
             forget() {
-                this.form.email=''
-                this.form.code =''
-                this.form.passs=''
-                this.form.checkPasss=''
+                this.form.email = ''
+                this.form.code = ''
+                this.form.passs = ''
+                this.form.checkPasss = ''
                 this.dialogFormVisible2 = !this.dialogFormVisible2
             },
             homepageClick() {
-               // this.$refs.dynamicValidateForm.validate(async valid => {
-               //      if (valid){
-                if (this.ruleForm.username===""||this.ruleForm.pass===""){
-                    this.$message({
-                        message: '您输入的字段为空',
-                        type: 'error'
-                    })
-                    return;
-                }
-                        var formData = new FormData();
-                        formData.append("username",this.ruleForm.username);
-                        formData.append("password",this.ruleForm.pass);
-                        console.log(this.ruleForm.rememberMe)
-                        if (this.ruleForm.rememberMe===true){
-                            formData.append("remember-me","on")
-                        }
-                        axios({
-                            method:'POST',
-                            url:'/login',
-                            data:formData,
-                            headers:{
-                                'Accept':'application/json, text/javascript, */*; q=0.01',
-                                'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+                this.$refs.loginForm.validate(valid => {
+                    if (valid) {
+                        try {
+                            this.loading = true
+                            console.log('dasdas')
+                            // 只有校验成功,我们才能调用actions
+                            // await this.send()
+                            var formData = new FormData();
+                            formData.append("username", this.ruleForm.username);
+                            formData.append("password", this.ruleForm.pass);
+                            console.log(this.ruleForm.rememberMe)
+                            if (this.ruleForm.rememberMe === true) {
+                                formData.append("remember-me", "on")
                             }
-                        }).then(res=>{
-                            console.log(res)
-                            console.log(res.data)
-                            console.log(res.data.status)
-                            if (res.data.status===200){
-                                console.log(res.data.obj)
-                                console.log(res.data.obj.url)
-                                let url= res.data.obj.url
-                                window.location.href=url
-                                return
-                            }
-                            this.$message({
-                                message: res.data.message,
-                                type: 'error'
+                            axios({
+                                method: 'POST',
+                                url: '/login',
+                                data: formData,
+                                headers: {
+                                    'Accept': 'application/json, text/javascript, */*; q=0.01',
+                                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                                }
+                            }).then(res => {
+                                console.log(res)
+                                console.log(res.data)
+                                console.log(res.data.status)
+                                if (res.data.status === 200) {
+                                    console.log(res.data.obj)
+                                    console.log(res.data.obj.url)
+                                    let url = res.data.obj.url
+                                    window.location.href = url
+                                    return
+                                }
+                                this.$message({
+                                    message: res.data.message,
+                                    type: 'error'
+                                })
+                            }).catch(err => {
+                                console.log(err) // 后台报错返回
                             })
-                        }).catch(err => {
-                            console.log(err) // 后台报错返回
-                        })
+                            // 应该登陆成功后
+                            // async 标记的函数实际上一个promise对象
+                            // await下面的代码都是执行成功的代码
+                        } catch (error) {
+                            console.log(error)
+                        } finally {
+                            this.loading = false
+                        }
+                    }
+
+                })
+
             },
-            getCode1(){
+            getCode1() {
                 if (this.ruleForm1.email === '') {
                     this.$message({
-                        message: '您输入的字段为空',
+                        message: '您输入的邮箱为空,请输入邮箱',
                         type: 'error'
                     })
+                    return
                 } else {
                     const TIME_COUNTs = 60;
                     if (!this.timers) {
@@ -337,69 +463,79 @@
                     console.log(err) // 后台报错返回
                 })
             },
-            login3Click(){
-                var formData = new FormData();
-                formData.append("userName",this.ruleForm1.username);
-                formData.append("email",this.ruleForm1.email);
-                formData.append("password",this.ruleForm1.pass);
-                formData.append("phone",this.ruleForm1.phone);
-                formData.append("code",this.ruleForm1.code1)
-                axios({
-                    method:'POST',
-                    url:'/user/register',
-                    data:formData,
-                    headers:{
-                        'Accept':'application/json, text/javascript, */*; q=0.01',
-                        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+            login3Click() {
+                this.$refs.registerForm.validate(valid => {
+                    if (valid) {
+                        try {
+                            var formData = new FormData();
+                            formData.append("userName", this.ruleForm1.username);
+                            formData.append("email", this.ruleForm1.email);
+                            formData.append("password", this.ruleForm1.pass);
+                            formData.append("phone", this.ruleForm1.phone);
+                            formData.append("code", this.ruleForm1.code1)
+                            axios({
+                                method: 'POST',
+                                url: '/user/register',
+                                data: formData,
+                                headers: {
+                                    'Accept': 'application/json, text/javascript, */*; q=0.01',
+                                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                                }
+                            }).then(res => {
+                                console.log(res.data)
+                                this.$message.success(res.data.msg);
+                                this.ruleForm.email = this.ruleForm1.email
+                                this.ruleForm.pass = this.ruleForm1.pass
+                                this.show4 = false
+                                this.show3 = true
+                                // console.log(res.data.status)
+                            }).catch(err => {
+                                console.log(err) // 后台报错返回
+                            })
+                        } catch (error) {
+                            console.log(error)
+                        } finally {
+                            console.log("end")
+                        }
                     }
-                }).then(res=>{
+                })
+            },
+            findPass() {
+                var formData = new FormData();
+                formData.append("userName", this.form.userName);
+                formData.append("email", this.form.email);
+                formData.append("newPassword", this.form.passs);
+                formData.append("rPassword", this.form.checkPasss);
+                formData.append("code", this.form.code)
+                axios({
+                    method: 'POST',
+                    url: '/user/forgetPassword',
+                    data: formData,
+                    headers: {
+                        'Accept': 'application/json, text/javascript, */*; q=0.01',
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                    }
+                }).then(res => {
                     console.log(res.data)
                     this.$message.success(res.data.msg);
-                    this.ruleForm.email = this.ruleForm1.email
-                    this.ruleForm.pass = this.ruleForm1.pass
-                    this.show4 = false
-                    this.show3 = true
                     // console.log(res.data.status)
                 }).catch(err => {
                     console.log(err) // 后台报错返回
                 })
             },
-            findPass(){
+            getCode() {
                 var formData = new FormData();
-                formData.append("userName",this.form.userName);
-                formData.append("email",this.form.email);
-                formData.append("newPassword",this.form.passs);
-                formData.append("rPassword",this.form.checkPasss);
-                formData.append("code",this.form.code)
+                formData.append("userName", this.form.userName);
+                formData.append("email", this.form.email);
                 axios({
-                    method:'POST',
-                    url:'/user/forgetPassword',
-                    data:formData,
-                    headers:{
-                        'Accept':'application/json, text/javascript, */*; q=0.01',
-                        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
+                    method: 'POST',
+                    url: '/user/sendCode',
+                    data: formData,
+                    headers: {
+                        'Accept': 'application/json, text/javascript, */*; q=0.01',
+                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                     }
-                }).then(res=>{
-                    console.log(res.data)
-                    this.$message.success(res.data.msg);
-                    // console.log(res.data.status)
-                }).catch(err => {
-                    console.log(err) // 后台报错返回
-                })
-            },
-            getCode(){
-                var formData = new FormData();
-                formData.append("userName",this.form.userName);
-                formData.append("email",this.form.email);
-                axios({
-                    method:'POST',
-                    url:'/user/sendCode',
-                    data:formData,
-                    headers:{
-                        'Accept':'application/json, text/javascript, */*; q=0.01',
-                        'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'
-                    }
-                }).then(res=>{
+                }).then(res => {
                     console.log(res.data)
                     this.$message.success(res.data.msg);
                     // console.log(res.data.status)
