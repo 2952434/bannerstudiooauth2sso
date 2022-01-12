@@ -22,7 +22,12 @@ spring:
       test-on-return: false
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: 20
-
+  level:
+    club.bannerstudio.bannerstudiooauth2sso: debug
+    org.springfromework.web: info
+    com.baomidou.mybatisplus: error
+    file:
+      name: log\oauth2sso.log
   #  邮箱
   mail:
     host: smtp.qq.com
@@ -34,7 +39,6 @@ spring:
       smtp:
         socketFactoryClass: javax.net.ssl.SSLSocketFactory
       debug: true
-
   #redis
   redis:
     host: 10.0.8.11
@@ -50,3 +54,6 @@ spring:
 
   main:
     allow-bean-definition-overriding: true
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

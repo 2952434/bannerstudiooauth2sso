@@ -30,9 +30,6 @@ public class UserAuthServiceImpl implements UserDetailsService {
 
     @Autowired
     protected MemberMapper memberMapper;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         logger.info("用户名："+userName);
