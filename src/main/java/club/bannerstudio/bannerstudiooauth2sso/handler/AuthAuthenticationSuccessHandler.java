@@ -43,7 +43,7 @@ public class AuthAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
             logger.info(jsonString);
             HttpSession httpSession = request.getSession();
             String url = httpSession.getAttribute("SPRING_SECURITY_SAVED_REQUEST") + "";
-            String substringUrl = url.substring(21, 149);
+            String substringUrl = url.substring(21, url.length()-1);
             logger.info("substringUrl：" + substringUrl);
             Map<String, Object> stringObjectMap = new HashMap<>();
             stringObjectMap.put("url", substringUrl);
