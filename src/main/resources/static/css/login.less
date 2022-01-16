@@ -34,7 +34,7 @@
       border-radius: 12px;
       .remember  {
         position: absolute;
-        top: 88%;
+        top: 95%;
         left: 0%;
           label {
             cursor: pointer;
@@ -43,34 +43,26 @@
       .register {
         position: absolute;
         //top: 60px;
-        bottom: 75px;
-        left: 22%;
+        bottom: 65px;
+        left: 18%;
       }
       .inputone {
         position: absolute;
         top: 110px;
-        left: 22%;
+        left: 18%;
         margin-bottom: 20px;
-        width: 270px;
-      }
-      .inputtwo {
-        position: absolute;
-        top: 165px;
-        height: 55px;
-        left: 22%;
-        margin-bottom: 20px;
-        width: 270px;
+        width: 300px;
       }
       .forget {
         position: absolute;
-        bottom: -40px;
-        left: 65%;
+        bottom: -50px;
+        left: 75%;
       }
       .denglu {
         position: absolute;
-        bottom: -85px;
+        bottom: -90px;
         left: 0%;
-        width: 270px;
+        width: 300px;
         border-radius: 12px;
       }
       .zhuce {
@@ -106,55 +98,33 @@
     .content1 {
       position: relative;
       width: 480px;
-      height: 540px;
+      height: 580px;
       margin: 10px auto;
       background: rgba(255,255,255,.8);
       border-radius: 12px;
       .register11 {
         position: absolute;
-        bottom: 70px;
-        left: 22%;
+        bottom: 65px;
+        left: 18%;
       }
       .inputone1 {
         position: absolute;
         top: 80px;
-        left: 22%;
+        left: 18%;
         margin-bottom: 20px;
-        width: 270px;
+        width: 300px;
+        .el-form-item {
+          margin-bottom: 30px!important;
+        }
       }
-      .inputtwo1 {
-        position: absolute;
-        top: 140px;
-        left: 22%;
-        margin-bottom: 20px;
-        width: 270px;
-      }
-      .inputThree1 {
-        position: absolute;
-        top: 265px;
-        left: 22%;
-        margin-bottom: 20px;
-        width: 270px;
-      }
-      .end {
-        margin-bottom: 0px;
-      }
-      //.inputFour1 {
-      //  position: absolute;
-      //  top: 370px;
-      //  left: 22%;
-      //  margin-bottom: 20px;
-      //  width: 270px;
         .yanone1,
         .yantwo1 {
           height: 40px;
         }
         .yanone1 {
-          width: 123px;
-          margin-left: -110px;
-          border: 1px solid #DCDFE6;
+          width: 180px;
+          margin-left: -122px;
           border-radius: 4px;
-          padding: 0 15px;
           transition: border-color .2s cubic-bezier(.645,.045,.355,1);
         }
         .yanone1:hover {
@@ -162,9 +132,8 @@
         }
         .yantwo1 {
           position: absolute;
-          //z-index: 4;
-          left: 63%;
-          top: 1%;
+          left: 65px;
+          margin-left: 135px;
           width: 100px;
           border-radius: 4px;
           border: 1px solid #DCDFE6;
@@ -180,9 +149,9 @@
       }
       .zhuceOne1 {
         position: absolute;
-        bottom: -75px;
+        bottom: -55px;
         left: 0%;
-        width: 270px;
+        width: 300px;
         border-radius: 12px;
       }
       .zhuce1 {
@@ -190,6 +159,103 @@
         right: 0;
         width: 170px;
       }
-    //}
   }
+}
+@media screen and (max-width: 480px){
+.whole {
+  background: url('../img/BackGroundImage.png') no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  .login {
+    width: 100%;
+    height: 100%;
+    margin-top: 200px;
+    .content {
+      width: 100%;
+      background-color: transparent;
+      .header {
+        color: antiquewhite;
+        text-align: center;
+        h1 {
+          font-size: 30px;
+        }
+        h2 {
+          color: antiquewhite;
+        }
+      }
+      .register {
+        color: antiquewhite;
+        left: 13%;
+        bottom: 65px;
+      }
+      .denglu {
+        width: 320px;
+      }
+      .inputone {
+        left: 12%;
+        width: 320px;
+        .forget {
+          left: 80%;
+          bottom: -50px;
+        }
+        .remember {
+          color: antiquewhite;
+          top: 95%;
+        }
+      }
+    }
+  }
+  .login11 {
+    top: 25%;
+    .zhuceOne1 {
+      bottom: -60px;
+      width: 320px;
+    }
+  .content1 {
+    background-color: transparent;
+    .header1 {
+      h2 {
+        color: antiquewhite;
+      }
+    }
+    .register11 {
+      color: antiquewhite;
+      left: 18%;
+      bottom: 20px;
+    }
+    .inputone1 {
+      width: 320px;
+      left: 17%;
+        .yanone1 {
+          padding: 0;
+          width: 205px;
+          border: none;
+          margin-left: -110px;
+        }
+        .yantwo1 {
+          position: absolute;
+          margin-left: 180px;
+          left: 40px;
+        }
+      .el-form-item {
+        margin-bottom: 30px!important;
+      }
+    }
+  }
+  }
+}
+}
+@media screen and (max-width: 380px){
+.login {
+  .inputone {
+    left: 7% !important;
+  }
+  .register {
+    left: 8% !important;
+  }
+}
 }

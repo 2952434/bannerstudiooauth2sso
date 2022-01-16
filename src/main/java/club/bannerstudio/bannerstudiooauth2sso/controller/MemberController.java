@@ -201,11 +201,11 @@ public class MemberController {
     }
 
 
-    @GetMapping("/user/head")
+    @GetMapping("/user/head/{userName}")
     @ApiOperation(value = "根据用户名查询用户头像")
     @ApiImplicitParam(type = "query",name = "userName",
             value = "用户名",required = true,dataTypeClass = String.class)
-    public RespBean selectHeadUrlByUserName(@RequestParam String userName) {
+    public RespBean selectHeadUrlByUserName(@PathVariable("userName") String userName) {
         return iMemberService.selectHeadUrlByUserName(userName);
     }
 }
