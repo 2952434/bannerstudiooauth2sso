@@ -119,8 +119,6 @@
         created() {
             this.name = document.getElementById("img").innerText
             var s2 = this.name.slice(6);
-            console.log(s2)
-            console.log(this.imgUrl)
             axios({
                 method: 'get',
                 url: '/user/head/'+s2,
@@ -129,19 +127,15 @@
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                 }
             }).then(res => {
-                console.log(res)
                 // console.log(res.data.obj)
                 this.imgUrl = res.data.obj
                 if (this.imgUrl === null) {
                     this.imgUrl = "../img/favicon.ico"
                 }
-                console.log(this.imgUrl)
-                console.log(res.data.status)
             }).catch(err => {
                 console.log(err) // 后台报错返回
             })
             this.requestUrl = document.location.toString()
-            console.log(this.requestUrl)
 
         }
     })

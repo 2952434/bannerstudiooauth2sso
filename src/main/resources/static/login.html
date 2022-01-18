@@ -120,7 +120,7 @@
                             <el-input type="password" v-model="ruleForm1.checkPass" autocomplete="off"
                                       placeholder="请再次确认密码"></el-input>
                         </el-form-item>
-                        <el-form-item prop="code1">
+                        <el-form-item prop="code1" class="ends">
                             <el-input type="text" v-model="ruleForm1.code1" placeholder="请输入验证码" class="yanone1" style="outline: #b0b0b0 none;"></el-input>
                             <el-button class="yantwo1" style="outline:none;text-align: center" v-show="show1" @click="getCode1">获取验证码
                             </el-button>
@@ -128,9 +128,6 @@
                                 {{counts}}s
                             </el-button>
                         </el-form-item>
-<!--                        <el-form-item class="end" >-->
-
-<!--                        </el-form-item>-->
                             <el-button type="primary" @click="login3Click" class="zhuceOne1">注册</el-button>
                     </el-form>
                 </div>
