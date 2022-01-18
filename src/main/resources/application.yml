@@ -6,7 +6,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://82.157.145.197:3306/oauth2sso?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+      url: jdbc:mysql://10.0.8.11:3306/oauth2sso?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
       username: oauth2sso
       password: oauth2sso
       filter: stat
@@ -41,7 +41,7 @@ spring:
       debug: true
   #redis
   redis:
-    host: 82.157.145.197
+    host: 10.0.8.11
     port: 6379
     database: 0
     jedis:
@@ -51,7 +51,6 @@ spring:
         max-idle: 8
         min-idle: 0
     timeout: 0
-    password: asd.123
 
   main:
     allow-bean-definition-overriding: true
