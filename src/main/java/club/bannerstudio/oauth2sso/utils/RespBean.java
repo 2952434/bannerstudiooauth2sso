@@ -81,4 +81,13 @@ public class RespBean {
         this.obj = obj;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "RespBean{" +
+                "status=" + status +
+                ", msg='" + msg + '\'' +
+                ", obj=" + obj +
+                '}';
+    }
 }

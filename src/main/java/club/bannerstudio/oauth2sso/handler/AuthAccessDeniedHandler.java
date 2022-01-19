@@ -1,6 +1,7 @@
 package club.bannerstudio.oauth2sso.handler;
 
 import club.bannerstudio.oauth2sso.utils.RespBean;
+import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,9 @@ public class AuthAccessDeniedHandler implements AccessDeniedHandler {
         response.setStatus(HttpStatus.OK.value());
         logger.error("权限不足，请联系管理员！！！");
 //        response.getWriter().write("权限不足，请联系管理员！！！");
+
         try {
-            response.getWriter().write(RespBean.error("权限不足，请联系管理员！！！").toString());
+            response.getWriter().write(JSON.toJSONString(RespBean.error("权限不足，请联系管理员！！！")));
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
