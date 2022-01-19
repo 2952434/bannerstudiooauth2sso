@@ -1,5 +1,6 @@
 package club.bannerstudio.oauth2sso.config;
 
+import club.bannerstudio.oauth2sso.handler.AuthAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,6 +34,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
                 .anyRequest().authenticated()
                 .and().csrf().disable()
                 //把session设置为无状态，意思是使用了token，那么session不再做数据的记录
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .exceptionHandling().accessDeniedHandler(new AuthAccessDeniedHandler());
     }
 }
