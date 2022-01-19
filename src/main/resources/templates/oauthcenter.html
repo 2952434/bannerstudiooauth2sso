@@ -37,7 +37,11 @@
                 </div>
                 <div class="only">
                     <form action="/oauth/authorize" method="post" style="border: none">
-                        <input name="authorize" class="bgc1" type="submit" value=" " :style="{backgroundImage: 'url(' + this.imgUrl + ')'}">
+                        <input type="hidden" name="user_oauth_approval" value="true">
+                        <div th:each="item:${scopes}">
+                            <input type="checkbox" th:name="'scope.'+${item}" id="all" style="width: 14px;height: 14px;" value="true" checked>
+                            <input name="authorize" class="bgc1" type="submit" value=" " :style="{backgroundImage: 'url(' + this.imgUrl + ')'}">
+                        </div>
                     </form>
                 </div>
                 <div th:text="'您的用户名为'+${userName}" id="img"></div>
@@ -94,25 +98,25 @@
             }
         },
         methods: {
-            authorize() {
-                var formData = new FormData();
-                formData.append("user_oauth_approval", true);
-                formData.append("authorize", true);
-                formData.append(document.getElementById("all").getAttribute("name"),true)
-                axios({
-                    method: 'POST',
-                    url: '/oauth/authorize',
-                    data: formData,
-                    headers: {
-                        'Accept': 'application/json, text/javascript, */*; q=0.01',
-                        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-                    }
-                }).then(res => {
-                    console.log(res)
-                }).catch(err => {
-                    console.log(err) // 后台报错返回
-                })
-            },
+            // authorize() {
+            //     var formData = new FormData();
+            //     formData.append("user_oauth_approval", true);
+            //     formData.append("authorize", true);
+            //     formData.append(document.getElementById("all").getAttribute("name"),true)
+            //     axios({
+            //         method: 'POST',
+            //         url: '/oauth/authorize',
+            //         data: formData,
+            //         headers: {
+            //             'Accept': 'application/json, text/javascript, */*; q=0.01',
+            //             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            //         }
+            //     }).then(res => {
+            //         console.log(res)
+            //     }).catch(err => {
+            //         console.log(err) // 后台报错返回
+            //     })
+            // },
         },
         mounted() {
         },
