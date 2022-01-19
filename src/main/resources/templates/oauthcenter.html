@@ -39,7 +39,7 @@
                     <form action="/oauth/authorize" method="post" style="border: none">
                         <input type="hidden" name="user_oauth_approval" value="true">
                         <div th:each="item:${scopes}">
-                            <input type="checkbox" th:name="'scope.'+${item}" id="all" style="width: 14px;height: 14px;" value="true" checked>
+                            <input type="" th:name="'scope.'+${item}" id="all" value="true" style="display: none" >
                         </div>
                         <input name="authorize" class="bgc1" type="submit" value=" " :style="{backgroundImage: 'url(' + this.imgUrl + ')'}">
                     </form>
