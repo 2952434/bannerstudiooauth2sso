@@ -84,6 +84,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .exceptionHandling().accessDeniedHandler(new AuthAccessDeniedHandler())
                 .and().cors();
-//                .authenticationEntryPoint(new AuthAuthenticationEntryPoint());
     }
 }

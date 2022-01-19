@@ -340,13 +340,11 @@
                     if (valid) {
                         try {
                             this.loading = true
-                            console.log('dasdas')
                             // 只有校验成功,我们才能调用actions
                             // await this.send()
                             var formData = new FormData();
                             formData.append("username", this.ruleForm.username);
                             formData.append("password", this.ruleForm.pass);
-                            console.log(this.ruleForm.rememberMe)
                             if (this.ruleForm.rememberMe === true) {
                                 formData.append("remember-me", "on")
                             }
@@ -480,7 +478,7 @@
                         } catch (error) {
                             console.log(error)
                         } finally {
-                            console.log("end")
+                            console.log("欢迎来到BannerStudio")
                         }
                     }
                 })
@@ -520,7 +518,7 @@
                         } catch (error) {
                             console.log(error)
                         } finally {
-                            console.log("end")
+                            console.log("欢迎来到BannerStudio")
                         }
                     }
                 })},
