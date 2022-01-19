@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>club.bannerstudio</groupId>
-    <artifactId>bannerstudiooauth2sso</artifactId>
+    <artifactId>oauth2sso</artifactId>
     <version>v1.0</version>
     <packaging>jar</packaging>
-    <name>bannerstudiooauth2sso</name>
+    <name>oauth2sso</name>
     <description>BannerStudioOauth2SSO</description>
 
     <properties>
@@ -164,7 +164,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.4.1</version>
                 <configuration>
-                    <mainClass>club.bannerstudio.bannerstudiooauth2sso.Bannerstudiooauth2ssoApplication</mainClass>
+                    <mainClass>club.bannerstudio.oauth2sso.Oauth2SSOApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
