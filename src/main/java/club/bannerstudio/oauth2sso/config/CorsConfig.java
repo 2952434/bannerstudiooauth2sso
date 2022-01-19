@@ -16,6 +16,6 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowedMethods("*")
                 .maxAge(1800)
-                .allowedOrigins("http://oauth.bannerstudio.club/");
+                .allowedOrigins("https://oauth.bannerstudio.club/");
     }
 }

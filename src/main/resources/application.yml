@@ -1,5 +1,8 @@
 server:
   port: 8090
+  tomcat:
+    remoteip: x-forwarded-for
+      protocol-header: x-forwarded-proto
 spring:
   datasource:
     name: mysql
