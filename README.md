@@ -1,39 +1,28 @@
 # BannerStudioOauth2SSO
 
 #### 介绍
-BannerStudio统一授权中心
-开发框架 SpringBoot+Mybatis Plus+Spring Security
-@author Ben
+BannerStudio统一授权中心<br/>
+开发框架 SpringBoot+Mybatis Plus+Spring Security<br/>
+@author Ben 刘盼 刘泽权 李君祥<br/>
 
-#### 软件架构
-软件架构说明
+#### 授权服务器
+/oauth/authorize：授权端点<br/>
+/oauth/token：令牌端点<br/>
+/oauth/confirm_access：用户确认授权提交端点<br/>
+/oauth/error：授权服务错误信息端点<br/>
+/oauth/check_token：用于资源服务访问的令牌解析端点<br/>
+/oauth/token_key：提供公有密匙的端点<br/>
 
-
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
+#### 资源服务器
+工作室内部成员数据<br/>
+用户数据和用户角色<br/>
 
 #### 使用说明
+使用时配置好自己的授权id和授权地址访问<br/>
+例如:https://oauth.bannerstudio.club/oauth/authorize?client_id=bannerstudioofficialwebsite&response_type=code&scope=all&redirect_uri=https://www.bannerstudio.club/callback<br/>
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+#### 项目部署地址 
+https://oauth.bannerstudio.club<br/>
 
-#### 参与贡献
-
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
-#### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+#### 项目部署端口
+8090
