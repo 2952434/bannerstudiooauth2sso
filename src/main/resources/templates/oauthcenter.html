@@ -40,8 +40,8 @@
                         <input type="hidden" name="user_oauth_approval" value="true">
                         <div th:each="item:${scopes}">
                             <input type="checkbox" th:name="'scope.'+${item}" id="all" style="width: 14px;height: 14px;" value="true" checked>
-                            <input name="authorize" class="bgc1" type="submit" value=" " :style="{backgroundImage: 'url(' + this.imgUrl + ')'}">
                         </div>
+                        <input name="authorize" class="bgc1" type="submit" value=" " :style="{backgroundImage: 'url(' + this.imgUrl + ')'}">
                     </form>
                 </div>
                 <div th:text="'您的用户名为'+${userName}" id="img"></div>
