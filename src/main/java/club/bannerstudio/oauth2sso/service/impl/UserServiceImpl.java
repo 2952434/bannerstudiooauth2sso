@@ -229,6 +229,7 @@ public class UserServiceImpl implements IUserService {
                     if (code.equals(redisCode)){
                         UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
                         updateWrapper.eq("userName",userName).set("password",passwordEncoder.encode(newPassword));
+                        userMapper.update(null,updateWrapper);
                         logger.info("修改密码成功"+newPassword);
                         return RespBean.ok("修改密码成功,新密码为："+newPassword);
                     }else {
