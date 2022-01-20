@@ -502,8 +502,6 @@
                                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                                 }
                             }).then(res => {
-                                console.log(res.data)
-                                alert(res.data.status)
                                if (res.data.status===200){
                                    this.$message.success(res.data.msg);
                                    return
