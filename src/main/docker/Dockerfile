@@ -7,7 +7,7 @@ RUN bash -c 'touch /oauth2sso-v1.0.jar' && \
 echo "Asia/Shanghai" > /etc/timezone
 EXPOSE 8090
 # 指定docker容器启动时运行jar包
-ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar","/oauth2sso.jar","-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8099"]
+ENTRYPOINT ["java", "-Djava.security.egd=file:/dev/./urandom","-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8099", "-jar","/oauth2sso.jar"]
 # 指定维护者的名字
 MAINTAINER bannerstudio
 RUN echo 'BannerStudio'
