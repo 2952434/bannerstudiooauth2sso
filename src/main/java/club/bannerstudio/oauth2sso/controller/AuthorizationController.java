@@ -37,46 +37,46 @@ public class AuthorizationController {
             logger.info("this is :" + session.toString() + "--> ");
             logger.info(name + " : " + value);
         }
-       String SPRING_SECURITY_CONTEXT=JSON.toJSONString(session.getAttribute("SPRING_SECURITY_CONTEXT"));
-        Map<String,Object> stringObjectMap=JsonUtils.toMap(SPRING_SECURITY_CONTEXT,String.class,Object.class);
-           logger.info("map:"+stringObjectMap);
-            logger.info("value:"+stringObjectMap.get("authentication"));
-     String  jsonAuthentication =JSON.toJSONString(stringObjectMap.get("authentication"));
-    logger.info("json转化后的jsonAuthentication："+jsonAuthentication);
-     Map<String,Object> objectMap=JsonUtils.toMap(jsonAuthentication,String.class,Object.class);
-        String userName=objectMap.get("name").toString();
-      String jsonAuthorities=JSON.toJSONString(objectMap.get("authorities"));
-        logger.info("jsonAuthorities"+jsonAuthorities);
-        logger.info("jsonAuthorities的class对象"+jsonAuthorities.getClass());
-     Object[] objects =JsonUtils.toBean(jsonAuthorities,Object[].class);
+        String SPRING_SECURITY_CONTEXT = JSON.toJSONString(session.getAttribute("SPRING_SECURITY_CONTEXT"));
+        Map<String, Object> stringObjectMap = JsonUtils.toMap(SPRING_SECURITY_CONTEXT, String.class, Object.class);
+        logger.info("map:" + stringObjectMap);
+        logger.info("value:" + stringObjectMap.get("authentication"));
+        String jsonAuthentication = JSON.toJSONString(stringObjectMap.get("authentication"));
+        logger.info("json转化后的jsonAuthentication：" + jsonAuthentication);
+        Map<String, Object> objectMap = JsonUtils.toMap(jsonAuthentication, String.class, Object.class);
+        String userName = objectMap.get("name").toString();
+        String jsonAuthorities = JSON.toJSONString(objectMap.get("authorities"));
+        logger.info("jsonAuthorities" + jsonAuthorities);
+        logger.info("jsonAuthorities的class对象" + jsonAuthorities.getClass());
+        Object[] objects = JsonUtils.toBean(jsonAuthorities, Object[].class);
         logger.info(objects[0].toString());
-       String jsonString=JSON.toJSONString(objects[0]);
-       logger.info(jsonString);
-      Map<String,String> stringStringMap=JsonUtils.toMap(jsonString,String.class,String.class);
-      String authority=stringStringMap.get("authority").toString();
-       logger.info(stringStringMap.get("authority").toString());
+        String jsonString = JSON.toJSONString(objects[0]);
+        logger.info(jsonString);
+        Map<String, String> stringStringMap = JsonUtils.toMap(jsonString, String.class, String.class);
+        String authority = stringStringMap.get("authority").toString();
+        logger.info(stringStringMap.get("authority").toString());
         ModelAndView modelAndView = new ModelAndView();
-       if (authority.equals("ROLE_User")){
-           modelAndView.addObject("userName",userName);
-           modelAndView.addObject("authority","用户");
-       }else if (authority.equals("ROLE_IntranetUser")){
-           modelAndView.addObject("userName",userName);
-           modelAndView.addObject("authority","工作室内部成员");
-       }else if (authority.equals("ROLE_InterViewUser")){
-           modelAndView.addObject("userName",userName);
-           modelAndView.addObject("authority","工作室面试官成员");
-       }else if(authority.equals("ROLE_AdminUser")){
-           modelAndView.addObject("userName",userName);
-           modelAndView.addObject("authority","工作室管理员");
-       }
-        logger.info("session信息："+SPRING_SECURITY_CONTEXT);
-        logger.info("model信息:"+model.toString());
+        if (authority.equals("ROLE_User")) {
+            modelAndView.addObject("userName", userName);
+            modelAndView.addObject("authority", "用户");
+        } else if (authority.equals("ROLE_IntranetUser")) {
+            modelAndView.addObject("userName", userName);
+            modelAndView.addObject("authority", "工作室内部成员");
+        } else if (authority.equals("ROLE_InterViewUser")) {
+            modelAndView.addObject("userName", userName);
+            modelAndView.addObject("authority", "工作室面试官成员");
+        } else if (authority.equals("ROLE_AdminUser")) {
+            modelAndView.addObject("userName", userName);
+            modelAndView.addObject("authority", "工作室管理员");
+        }
+        logger.info("session信息：" + SPRING_SECURITY_CONTEXT);
+        logger.info("model信息:" + model.toString());
         AuthorizationRequest authorizationRequest = (AuthorizationRequest) model.get("authorizationRequest");
         modelAndView.setViewName("oauthcenter");
-     stringObjectMap.put("scopes",authorizationRequest.getScope());
+        stringObjectMap.put("scopes", authorizationRequest.getScope());
         modelAndView.addObject("clientId", authorizationRequest.getClientId());
-        modelAndView.addObject("scopes",authorizationRequest.getScope());
-       logger.info("请求地址："+request.getRequestURL());
+        modelAndView.addObject("scopes", authorizationRequest.getScope());
+        logger.info("请求地址：" + request.getRequestURL());
         return modelAndView;
     }
 }

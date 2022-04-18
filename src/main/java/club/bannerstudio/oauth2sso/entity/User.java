@@ -68,4 +68,7 @@ public class User {
      */
     @TableField("role")
     private String role;
+
+    @TableField("creatTime")
+    private String creatTime;
 }

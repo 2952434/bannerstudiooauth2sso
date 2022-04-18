@@ -17,6 +17,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -67,6 +69,9 @@ public class UserServiceImpl implements IUserService {
         queryWrapper = queryWrapper.eq("userName", user.getUserName());
         List<User> list = userMapper.selectList(queryWrapper);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        user.setCreatTime(dateFormat.format(date));
         if (list.size() == 0) {
             String redisCode = redisTemplate.opsForValue().get(user.getEmail());
             if (!code.equals(redisCode)){
@@ -95,6 +100,9 @@ public class UserServiceImpl implements IUserService {
         queryWrapper = queryWrapper.eq("userName", user.getUserName());
         List<User> list = userMapper.selectList(queryWrapper);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Date date = new Date();
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        user.setCreatTime(dateFormat.format(date));
         if (list.size() == 0) {
             if (userMapper.insert(user) == 1){
                 logger.info("插入成功");

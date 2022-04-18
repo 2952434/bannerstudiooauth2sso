@@ -21,8 +21,6 @@ public class BannerJwtConfig extends JwtAccessTokenConverter {
 
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-//        Map<String, Object> additionalInformation = new LinkedHashMap<>();
-//        Map<String, Object> info = new LinkedHashMap<>();
         Map<String, String> requestParameters = authentication.getOAuth2Request().getRequestParameters();
         Authentication userAuthentication = authentication.getUserAuthentication();
         logger.info("用户权限:"+userAuthentication.getAuthorities());
@@ -35,14 +33,6 @@ public class BannerJwtConfig extends JwtAccessTokenConverter {
         userInfo.put("userName",userAuthentication.getName());
         userInfo.put("userDetails",userAuthentication.getDetails());
         userInfo.put("userPrincipal",userAuthentication.getPrincipal());
-//        info.put("author", "江南一点雨");
-//        info.put("email", "wangsong0210@gmail.com");
-//        info.put("site", "www.javaboy.org");
-//        info.put("weixin", "a_java_boy2");
-//        info.put("WeChat Official Accounts", "江南一点雨");
-//        info.put("GitHub", "https://github.com/lenve");
-//        info.put("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-//        additionalInformation.put("info", info);
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(userInfo);
         return super.enhance(accessToken, authentication);
     }
