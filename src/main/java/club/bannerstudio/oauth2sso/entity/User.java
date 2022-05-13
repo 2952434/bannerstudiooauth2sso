@@ -71,4 +71,15 @@ public class User {
 
     @TableField("creatTime")
     private String creatTime;
+
+
+    public User(AuthUser authUser) {
+        this.id = authUser.getId();
+        this.userName = authUser.getUserName();
+        this.password = authUser.getPassword();
+        this.email = authUser.getEmail();
+        this.phone = authUser.getPhone();
+        this.role = authUser.getRole();
+        this.creatTime = authUser.getCreatTime();
+    }
 }

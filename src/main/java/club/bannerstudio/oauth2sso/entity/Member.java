@@ -151,4 +151,24 @@ public class Member {
     @TableField(value = "personalIntroduction")
     private String personalIntroduction;
 
+    public Member(AuthUser authUser) {
+        this.userId = authUser.getId();
+        this.bannerId = authUser.getId();
+        this.memberName = authUser.getMemberName();
+        this.sex = authUser.getSex();
+        this.direction = authUser.getDirection();
+        this.grade = authUser.getGrade();
+        this.birthday = authUser.getBirthday();
+        this.headPortraitUrl = authUser.getHeadPortraitUrl();
+        this.blogUrl = authUser.getBlogUrl();
+        this.gitUrl = authUser.getGitUrl();
+        this.personalizedSignature = authUser.getPersonalizedSignature();
+        this.memberQQ = authUser.getMemberQQ();
+        this.memberWeChat = authUser.getMemberWeChat();
+        this.memberCompany = authUser.getMemberCompany();
+        this.memberWork = authUser.getMemberWork();
+        this.memberAddress = authUser.getMemberAddress();
+        this.memberPay = authUser.getMemberPay();
+        this.personalIntroduction = authUser.getPersonalIntroduction();
+    }
 }
