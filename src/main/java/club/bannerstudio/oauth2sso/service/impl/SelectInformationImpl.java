@@ -55,16 +55,16 @@ public class SelectInformationImpl implements ISelectInformation {
     }
 
     /**
-     * 查询所有方向
+     * 根据年级查询所有方向
+     * @param grade 年级
      * @return List<Map<String,String>>
-     *
      */
     @Override
-    public List<Map<String, String>> selectDirectionGroupBy() {
-        List<Map<String, String>> maps = memberMapper.selectDirectionGroupBy();
+    public List<Map<String, String>> selectDirectionGroupBy(String grade) {
+        List<Map<String, String>> maps = memberMapper.selectDirectionGroupBy(grade);
         if (maps.size()==0){
             logger.error("数据查询失败");
-            return null;
+            return maps;
         }
         logger.info("查询成功");
         return maps;
@@ -80,7 +80,7 @@ public class SelectInformationImpl implements ISelectInformation {
         List<Map<String, String>> maps = memberMapper.selectGradeGroupBy();
         if (maps.size()==0){
             logger.error("数据查询失败");
-            return null;
+            return maps;
         }
         logger.info("查询成功");
         return maps;
@@ -98,7 +98,7 @@ public class SelectInformationImpl implements ISelectInformation {
         List<Map<String, String>> maps = memberMapper.selectUserIdAndMemberName(direction, grade);
         if (maps.size()==0){
             logger.error("数据查询失败");
-            return null;
+            return maps;
         }
         logger.info("查询成功");
         return maps;

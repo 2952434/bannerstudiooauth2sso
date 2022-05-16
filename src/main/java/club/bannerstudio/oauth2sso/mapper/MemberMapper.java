@@ -18,12 +18,12 @@ public interface MemberMapper extends BaseMapper<Member> {
 
 
     /**
-     * 查询所有方向
+     * 根据年级查询所有方向
+     * @param grade 年级
      * @return List<Map<String,String>>
-     *
      */
-    @Select("select me.direction from member me group by me.direction having me.direction != '全方向'")
-    List<Map<String,String>> selectDirectionGroupBy();
+    @Select("select me.direction from member me where me.grade= #{grade} group by me.direction having me.direction != '全方向' order by count(me.direction)")
+    List<Map<String,String>> selectDirectionGroupBy(@Param("grade") String grade);
 
     /**
      * 查询年级

@@ -21,11 +21,11 @@ public interface ISelectInformation {
     AuthUser selectAuthUserByUserName(String userName);
 
     /**
-     * 查询所有方向
+     * 根据年级查询所有方向
+     * @param grade 年级
      * @return List<Map<String,String>>
-     *
      */
-    List<Map<String,String>> selectDirectionGroupBy();
+    List<Map<String,String>> selectDirectionGroupBy(String grade);
 
     /**
      * 查询年级

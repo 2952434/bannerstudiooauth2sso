@@ -40,10 +40,12 @@ public class SelectInformationController {
         return RespBean.ok("查询成功",iSelectInformation.selectGradeGroupBy());
     }
 
-    @GetMapping("/admin/selectDirectionGroupBy")
-    @ApiOperation(value = "资源服务器查询所有用户方向",httpMethod = "GET")
-    public RespBean selectDirectionGroupBy(){
-        return RespBean.ok("查询成功",iSelectInformation.selectDirectionGroupBy());
+    @GetMapping("/admin/selectDirectionGroupBy/{grade}")
+    @ApiOperation(value = "资源服务器根据年级查询所有用户方向",httpMethod = "GET")
+    @ApiImplicitParam(type = "query", name = "grade",
+            value = "年级", required = true, dataTypeClass = String.class)
+    public RespBean selectDirectionGroupBy(@PathVariable String grade){
+        return RespBean.ok("查询成功",iSelectInformation.selectDirectionGroupBy(grade));
     }
 
     @GetMapping("/admin/selectUserIdAndMemberName/{direction}/{grade}")
