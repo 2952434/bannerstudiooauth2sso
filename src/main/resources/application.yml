@@ -4,6 +4,10 @@ server:
     remoteip:
       protocol-header: x-forwarded-proto
       remote-ip-header: x-forwarded-for
+  servlet:
+    session:
+      cookie:
+        path: /
 spring:
   datasource:
     name: mysql

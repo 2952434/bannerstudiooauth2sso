@@ -3,6 +3,7 @@ package club.bannerstudio.oauth2sso.config;
 import club.bannerstudio.oauth2sso.handler.AuthAccessDeniedHandler;
 import club.bannerstudio.oauth2sso.handler.AuthAuthenticationFailureHandler;
 import club.bannerstudio.oauth2sso.handler.AuthAuthenticationSuccessHandler;
+import club.bannerstudio.oauth2sso.handler.CustomLogoutSuccessHandler;
 import club.bannerstudio.oauth2sso.service.impl.UserAuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     protected AuthAuthenticationSuccessHandler authAuthenticationSuccessHandler;
 
+    @Autowired
+    private CustomLogoutSuccessHandler customLogoutSuccessHandler;
 
     @Autowired
     protected UserAuthServiceImpl userAuthService;
@@ -66,6 +69,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")
                 .successHandler(authAuthenticationSuccessHandler)
                 .failureHandler(authAuthenticationFailureHandler)
+                .permitAll()
+                .and()
+                // 默认为 /logout
+                .logout()
+                .logoutSuccessHandler(customLogoutSuccessHandler)
+                // 无效会话
+                .invalidateHttpSession(true)
+                // 清除身份验证
+                .clearAuthentication(true)
                 .permitAll()
                 .and()
                 .requestMatchers().antMatchers("/oauth/**","/login/**","/logout/**")
