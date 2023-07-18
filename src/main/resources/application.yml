@@ -14,9 +14,9 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://10.0.8.11:3306/oauth2sso?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
-      username: oauth2sso
-      password: oauth2sso
+      url: jdbc:mysql://10.0.8.11:3306/database?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+      username: ******
+      password: ******
       filter: stat
       initial-size: 1
       min-idle: 1
@@ -40,8 +40,8 @@ spring:
   mail:
     host: smtp.qq.com
     port: 587
-    username: 2952434583@qq.com
-    password: spmkmsoighssdhdd
+    username: email
+    password: ******
     default-encoding: UTF-8
     properties:
       smtp:
@@ -50,7 +50,7 @@ spring:
   #redis
   redis:
     host: 10.0.8.11
-    port: 6379
+    port: ******
     database: 0
     jedis:
       pool:
