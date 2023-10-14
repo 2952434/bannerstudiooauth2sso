@@ -33,3 +33,6 @@ build/
 /bannerstudiooauth2sso.iml
 /mvnw
 /mvnw.cmd
+
+/src/main/docker/
+/src/main/resources/application.yml

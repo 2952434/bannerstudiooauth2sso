@@ -3,7 +3,7 @@
 #### 介绍
 BannerStudio统一授权中心<br/>
 开发框架 SpringBoot+Mybatis Plus+Spring Security<br/>
-@author Ben 刘盼 刘泽权 李君祥<br/>
+@author Ben 刘泽权 李君祥<br/>
 
 #### 授权服务器
 /oauth/authorize：授权端点<br/>
@@ -22,7 +22,4 @@ BannerStudio统一授权中心<br/>
 例如:https://oauth.bannerstudio.club/oauth/authorize?client_id=bannerstudioofficialwebsite&response_type=code&scope=all&redirect_uri=https://www.bannerstudio.club/callback<br/>
 
 #### 项目部署地址 
-https://oauth.bannerstudio.club<br/>
-
-#### 项目部署端口
-8090
+http://82.157.145.197:8081/<br/>
