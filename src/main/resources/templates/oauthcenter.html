@@ -4,23 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <title>旗帜软件工作室授权中心</title>
-    <link rel="stylesheet" href="https://oauthstatic.bannerstudio.club/static/css/base.css">
-    <link rel="shortcut icon" href="https://oauthstatic.bannerstudio.club/static/img/favicon.ico"/>
-    <link rel="stylesheet" href="https://oauthstatic.bannerstudio.club/static/css/center.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="shortcut icon" href="/img/favicon.ico"/>
+    <link rel="stylesheet" href="/css/center.css">
     <!-- 引入样式 -->
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="/css/http_unpkg.com_element-ui_lib_theme-chalk_index.css">
     <!--    引入bootstrap-->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/2.6.14/vue.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/js/http_lf3-cdn-tos.bytecdntp.com_cdn_expire-1-M_vue_2.6.14_vue.js"></script>
     <!-- 引入组件库 -->
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script type="text/javascript" src="https://repo.bfw.wiki/bfwrepo/js/jquery-3.2.1.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/http_unpkg.com_element-ui_lib_index.js"></script>
+    <script type="text/javascript" src="/js/http_repo.bfw.wiki_bfwrepo_js_jquery-3.2.1.min.js"></script>
+    <script src="/js/http_unpkg.com_axios_dist_axios.js"></script>
 </head>
 <body >
 <div id="app">
     <div class="header">
-        <div class="logo"><img src="https://oauthstatic.bannerstudio.club/static/img/favicon.ico" alt=""></div>
+        <div class="logo"><img src="/img/favicon.ico" alt=""></div>
         <div class="text">旗帜软件工作室授权中心</div>
     </div>
     <div class="container starlight">
@@ -115,7 +115,7 @@
             }).then(res => {
                 this.imgUrl = res.data.obj
                 if (this.imgUrl === null) {
-                    this.imgUrl = "https://oauthstatic.bannerstudio.club/static/img/favicon.ico"
+                    this.imgUrl = "../static/img/favicon.ico"
                 }
             }).catch(err => {
                 console.log(err) // 后台报错返回
@@ -125,6 +125,6 @@
         }
     })
 </script>
-<script type="text/javascript" src="https://repo.bfw.wiki/bfwrepo/js/starlight.js"></script>
+<script type="text/javascript" src="/js/http_repo.bfw.wiki_bfwrepo_js_starlight.js"></script>
 </body>
 </html>

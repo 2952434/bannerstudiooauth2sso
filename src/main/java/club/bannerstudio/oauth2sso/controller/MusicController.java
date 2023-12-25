@@ -25,6 +25,7 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "用户音乐操作接口", value = "MusicController")
+@CrossOrigin
 public class MusicController {
     protected static final Logger logger = LoggerFactory.getLogger(MusicController.class);
 

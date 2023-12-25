@@ -25,6 +25,7 @@ import java.util.Map;
  */
 @RestController
 @Api(tags = "Oauth客户端操作", value = "OauthClientDetailsController")
+@CrossOrigin
 public class OauthClientDetailsController {
 
     protected static final Logger logger = LoggerFactory.getLogger(OauthClientDetailsController.class);

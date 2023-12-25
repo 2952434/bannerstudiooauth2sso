@@ -34,5 +34,3 @@ build/
 /mvnw
 /mvnw.cmd
 
-/src/main/docker/
-/src/main/resources/application.yml

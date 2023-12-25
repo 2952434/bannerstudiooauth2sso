@@ -3,7 +3,6 @@ package club.bannerstudio.oauth2sso.config;
 import club.bannerstudio.oauth2sso.handler.AuthAccessDeniedHandler;
 import club.bannerstudio.oauth2sso.handler.AuthAuthenticationFailureHandler;
 import club.bannerstudio.oauth2sso.handler.AuthAuthenticationSuccessHandler;
-import club.bannerstudio.oauth2sso.handler.CustomLogoutSuccessHandler;
 import club.bannerstudio.oauth2sso.service.impl.UserAuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,8 +34,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     protected AuthAuthenticationSuccessHandler authAuthenticationSuccessHandler;
 
-    @Autowired
-    private CustomLogoutSuccessHandler customLogoutSuccessHandler;
 
     @Autowired
     protected UserAuthServiceImpl userAuthService;
@@ -54,7 +51,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/login.html", "/css/**", "/js/**", "/img/**","/favicon.ico","/user/**","/agreement.html");
-
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -71,14 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureHandler(authAuthenticationFailureHandler)
                 .permitAll()
                 .and()
-                // 默认为 /logout
                 .logout()
-                .logoutSuccessHandler(customLogoutSuccessHandler)
-                // 无效会话
-                .invalidateHttpSession(true)
-                // 清除身份验证
-                .clearAuthentication(true)
-                .permitAll()
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("http://82.157.145.197:8090/oauth/authorize?client_id=testforumlogin&response_type=code&scope=all&redirect_uri=http://82.157.145.197:8081/transfer")
                 .and()
                 .requestMatchers().antMatchers("/oauth/**","/login/**","/logout/**")
                 .and()
@@ -86,7 +77,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .exceptionHandling().accessDeniedHandler(new AuthAccessDeniedHandler())
-                .and()
-                .cors();
+                .and().cors();
     }
 }

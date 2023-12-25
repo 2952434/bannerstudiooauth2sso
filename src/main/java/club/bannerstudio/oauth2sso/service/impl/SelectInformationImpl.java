@@ -9,7 +9,6 @@ import club.bannerstudio.oauth2sso.service.ISelectInformation;
 import club.bannerstudio.oauth2sso.utils.RespBean;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import org.apache.ibatis.annotations.Update;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

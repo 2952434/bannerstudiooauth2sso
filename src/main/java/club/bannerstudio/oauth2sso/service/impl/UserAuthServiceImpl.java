@@ -1,11 +1,9 @@
 package club.bannerstudio.oauth2sso.service.impl;
 
-import club.bannerstudio.oauth2sso.entity.AuthUser;
 import club.bannerstudio.oauth2sso.entity.Member;
 import club.bannerstudio.oauth2sso.entity.User;
 import club.bannerstudio.oauth2sso.mapper.MemberMapper;
 import club.bannerstudio.oauth2sso.mapper.UserMapper;
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -26,6 +26,7 @@ import java.util.Map;
 
 @RestController
 @Api(tags = "用户信息管理", value = "UserController")
+@CrossOrigin
 public class UserController {
     protected static final Logger logger = LoggerFactory.getLogger(UserController.class);
 

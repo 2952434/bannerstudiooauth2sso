@@ -2,10 +2,11 @@ package club.bannerstudio.oauth2sso.controller;
 
 import club.bannerstudio.oauth2sso.utils.JsonUtils;
 import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import io.swagger.annotations.Api;
 import org.springframework.security.oauth2.provider.AuthorizationRequest;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -13,7 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.Map;
 
 /**
  * @Author: Ben
@@ -22,6 +24,7 @@ import java.util.*;
 @RestController
 @SessionAttributes("authorizationRequest")
 @Api(value = "AuthorizationController")
+@CrossOrigin
 public class AuthorizationController {
     protected static final Logger logger = LoggerFactory.getLogger(AuthorizationController.class);
 

@@ -12,6 +12,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
  */
 @Configuration
 public class AccessTokenConfig {
+
     @Bean
     TokenStore tokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter());
